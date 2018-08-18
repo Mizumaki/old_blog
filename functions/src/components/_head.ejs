@@ -1,0 +1,18 @@
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <!-- AMPライブラリを追加。URLの末尾に #development=1 を追加することで、コンソールでエラーが確認できる -->
+  <title><%= data.header.title %></title>
+  <link rel="canonical" href="/articles/template.amp.html" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="<%= data.header.lead %>">
+  <meta name="keywords" content="<%- data.tags.join() %>">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <%- include('css/_amp-boilerplate') %>
+  <style amp-custom>
+  <%- include('css/_reset') %>
+  <%- include('css/_common') %>
+  <%- include('css/_prismJs') %>
+  <%- include('css/_article') %>
+  </style>
+<head>

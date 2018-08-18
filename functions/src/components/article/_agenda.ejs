@@ -1,0 +1,22 @@
+<section class="agenda">
+  <div class='agenda'>
+    <h4>目次</h4>
+    <ol>
+      <% agenda.forEach(function (content) { %>
+        <% const h2 = content.h2 %>
+        <% if (content.h3.length == 0) { %>
+        <li><a href="#<%- h2.replace(/\s/g, '-') %>"><%= h2 %></a></li>
+        <% } else { %>
+        <li><a href="#<%- h2.replace(/\s/g, '-') %>"><%= h2 %></a>
+          <ol>
+            <% content.h3.forEach(function (h3) { %>
+            <% console.log(h3) %>
+            <li><a href="#<%- h3.replace(/\s/g, '-') %>"><%= h3 %></a></li>
+            <% }); %>
+          </ol>
+        </li>
+        <% } %>
+      <% }); %>
+    </ol>
+  </div>
+</section>

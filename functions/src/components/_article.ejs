@@ -1,0 +1,12 @@
+<article class="article">
+  <main role="main">
+    <div class='content'>
+      <%- include('article/_header', {header: data.header, category: data.category, tags: data.tags}) %>
+      <%- include('article/_article-main', {main: data.body}) %>
+    </div>
+    <%- include('article/_footer') %>
+  </main>
+  <aside>
+    <%- include('_related-articles') %>
+  </aside>
+</article>
