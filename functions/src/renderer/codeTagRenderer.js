@@ -9,12 +9,8 @@ module.exports = function (code, file_name, escaped) {
   } else if (file_name === "console") {
     file_name = "aaa.html"
   }
-  console.log("file name is", file_name);
-  console.log("file name's type is : ", typeof (file_name));
   // ファイル名の拡張子を取得
-  console.log("file_name is : ", file_name);
   const file_ext = path.extname(file_name);
-  console.log(file_ext);
   let language;
   let highlighted_code;
   switch (file_ext) {

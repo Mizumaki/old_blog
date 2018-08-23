@@ -41,20 +41,34 @@ const createArticleHtml = (data, context) => {
     .then(($) => {
       console.log("$'s html is this :", $.html());
       $('#header').remove();
-      makeAgenda($, (err, agenda) => {
-        if (err) {
-          throw err;
-        }
-        agendaToHtml(agenda, (err, agenda_html) => {
-          if (err) {
-            console.log(err);
-          }
-          $(agenda_html).insertAfter('header.article');
-        });
-      })
-      return $.html();
+      //const agenda = makeAgenda($);
+      //console.log("agenda is this : ", agenda);
+      //return agendaToHtml(agenda, (err, agenda_html) => {
+      //  if (err) {
+      //    throw err;
+      //  }
+      //  console.log("agenda html is this : ", agenda_html);
+      //  $('header.article').after(agenda_html);
+      //  console.log("after article 処理");
+      //  return $.html();
+      //});
+      return insertAgenda($);
+      //return makeAgenda($, (err, agenda) => {
+      //  if (err) {
+      //    throw err;
+      //  }
+      //  return agendaToHtml(agenda, (err, agenda_html) => {
+      //    if (err) {
+      //      console.log(err);
+      //    }
+      //    console.log("agendahtml is this", agenda_html);
+      //    $(agenda_html).insertAfter('header.article');
+      //    return $.html();
+      //  });
+      //});
     })
     .then((html) => {
+      console.log("before minify html : ", html);
       const minified_html = minify(html, {
         collapseWhitespace: true,
         minifyCSS: true,
@@ -110,75 +124,60 @@ const buildHtml = (data) => {
   })
 }
 
-const makeAgenda = (cheerio_object) => {
-  return new Promise((resolve, reject) => {
-    console.log("In makeAgenda");
-    const $ = cheerio_object;
-    const agenda = [];
-    $('div.article-main section').map((i, node) => {
-      return $(node).find('h2').map((i, h2) => {
-        const array = {
-          "h2": $(h2).text(),
-          "h3": []
-        }
-        const count = $(node).find('h3');
-        if (count.length >= 1) {
-          $(node).find('h3').map((i, h3) => {
-            return array.h3.push($(h3).text());
-          })
-        }
-        return agenda.push(array);
-      })
-    })
-    resolve(agenda);
-  })
+const insertAgenda = $ => {
+  const agenda = makeAgenda($);
+  console.log("agenda is this : ", agenda);
+  return agendaToHtml(agenda)
+    .then((agenda_html) => {
+      console.log("agenda_html : ", agenda_html);
+      $('header.article').after(agenda_html);
+      return $.html();
+    }).catch(error => console.log(error));
 }
 
-const OldmakeAgenda = (cheerio_object) => {
+const makeAgenda = $ => {
   console.log("In makeAgenda");
-  const $ = cheerio_object;
   const agenda = [];
-  return Promise.all(
-      $('div.article-main section').map((i, node) => {
-        return $(node).find('h2').map((i, h2) => {
-          const array = {
-            "h2": $(h2).text(),
-            "h3": []
-          }
-          const count = $(node).find('h3');
-          if (count.length >= 1) {
-            $(node).find('h3').map((i, h3) => {
-              return array.h3.push($(h3).text());
-            })
-          }
-          return agenda.push(array);
-        })
-      })
-    ).then((agenda) => {
-      if (agenda.length === 0) {
-        const error = "agenda is not fulfilled"
-        throw error;
-      }
-      console.log("agenda is this : ", agenda);
-      return agenda;
+  $('div.article-main section').map((_, node) =>
+    agenda.push({
+      'h2': $(node).find('h2').text(),
+      'h3': $(node).find('h3').map((_, h3) => $(h3).text()).get()
     })
-    .catch((error) => {
-      throw error;
-    })
+  )
+  console.log(agenda);
+  return agenda;
 }
 
 const agendaToHtml = (agenda) => {
-  console.log("in agendaToHtml");
-  return ejs.renderFile('src/components/article/_agenda.ejs', {
-      filename: 'src/components/article/_agenda.ejs',
-      agenda: agenda
-    }, 'utf-8',
-    (err, html) => {
-      if (err) {
-        throw err;
-      }
-      return html;
-    })
+  return new Promise((resolve, reject) => {
+    console.log("in agendaToHtml and agenda : ", agenda);
+    ejs.renderFile('src/components/article/_agenda.ejs', {
+        filename: 'src/components/article/_agenda.ejs',
+        agenda: agenda
+      }, 'utf-8',
+      (err, html) => {
+        console.log("html is this", html);
+        if (err) {
+          reject(err);
+        }
+        resolve(html);
+      });
+  });
 }
+
+//const agendaToHtml = ($, agenda) => {
+//  console.log("in agendaToHtml and agenda : ", agenda);
+//  return ejs.renderFile('src/components/article/_agenda.ejs', {
+//      filename: 'src/components/article/_agenda.ejs',
+//      agenda: agenda
+//    }, 'utf-8',
+//    (err, html) => {
+//      console.log("html is this", html);
+//      if (err) {
+//        throw err;
+//      }
+//      return html;
+//    })
+//}
 
 module.exports = createArticleHtml;
