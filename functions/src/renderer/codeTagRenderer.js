@@ -4,8 +4,17 @@ const loadLanguages = require('prismjs/components/');
 loadLanguages(['jsx', 'ruby']);
 
 module.exports = function (code, file_name, escaped) {
+  if (file_name === undefined) {
+    file_name = "aaa.html"
+  } else if (file_name === "console") {
+    file_name = "aaa.html"
+  }
+  console.log("file name is", file_name);
+  console.log("file name's type is : ", typeof (file_name));
+  // ファイル名の拡張子を取得
+  console.log("file_name is : ", file_name);
   const file_ext = path.extname(file_name);
-  console.log(file_ext)
+  console.log(file_ext);
   let language;
   let highlighted_code;
   switch (file_ext) {
@@ -30,6 +39,7 @@ module.exports = function (code, file_name, escaped) {
       highlighted_code = Prism.highlight(code, Prism.languages.ruby, language);
       break;
     default:
+      language = ""
       highlighted_code = code;
       break;
   }
