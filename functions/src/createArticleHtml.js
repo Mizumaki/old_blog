@@ -6,84 +6,52 @@ const firebase = require('./firebase');
 const storage = firebase.storage;
 const myMarked = require('./myMarked');
 
-const createArticleHtml = (data, context) => {
+const createArticleHtml = (DATA) => {
+  // 以降、このファイルにおけるDATAは、Firestoreから下ってきたデータツリーを指す。
   console.log("in createArticle Html");
-  //console.log("snap from firestore is this : ", snap.data());
-  //const data = snap.data();
-  const md_data_path = data.body;
-  console.log("storage path is : ", md_data_path);
-  const file = storage.bucket().file(md_data_path);
-  console.log("it is fucking statham version!!")
-  return file.download()
-    .then((file_data) => {
-      console.log("data[0].toString is this :", file_data[0].toString('utf-8'));
-      const text_file_data = file_data[0].toString('utf-8');
-      return text_file_data;
+  const category = DATA.category
+  const articleDataPath = `${category.main}/${category.sub}/${DATA.file_name}`;
+  const articleMdDataPath = `md_articles/${articleDataPath}.md`;
+  const articleMdFileStorageRef = storage.bucket().file(articleMdDataPath);
+  console.log("it is awesome statham version!!")
+  return articleMdFileStorageRef.download()
+    .then((mdFileData) => {
+      console.log("data[0].toString is this :", mdFileData[0].toString('utf-8'));
+      const mdTextData = mdFileData[0].toString('utf-8');
+      return mdTextData;
     })
-    .then((md_data) => {
-      console.log("next action is mdToHtml");
-      return mdToHtml(md_data);
+    .then((mdData) => {
+      return mdToHtml(mdData);
     })
-    .then((body_html) => {
-      data.body = body_html;
-      console.log("data is now have html : ", data);
-      return buildHtml(data);
+    .then((bodyHtml) => {
+      DATA.body = bodyHtml;
+      return buildHtml(DATA);
     })
     .then((html) => {
-      console.log("compiled html is send to next func : ", html);
       // htmlのテキストデータを、htmlファイルのように扱えるようにする。
-      return cheerio.load(html, {
-        decodeEntities: true
-      }, (err) => {
-        throw err;
-      });
+      return cheerio.load(html,{decodeEntities: true}, (err) => {throw err;});
     })
     .then(($) => {
-      console.log("$'s html is this :", $.html());
       $('#header').remove();
-      //const agenda = makeAgenda($);
-      //console.log("agenda is this : ", agenda);
-      //return agendaToHtml(agenda, (err, agenda_html) => {
-      //  if (err) {
-      //    throw err;
-      //  }
-      //  console.log("agenda html is this : ", agenda_html);
-      //  $('header.article').after(agenda_html);
-      //  console.log("after article 処理");
-      //  return $.html();
-      //});
       return insertAgenda($);
-      //return makeAgenda($, (err, agenda) => {
-      //  if (err) {
-      //    throw err;
-      //  }
-      //  return agendaToHtml(agenda, (err, agenda_html) => {
-      //    if (err) {
-      //      console.log(err);
-      //    }
-      //    console.log("agendahtml is this", agenda_html);
-      //    $(agenda_html).insertAfter('header.article');
-      //    return $.html();
-      //  });
-      //});
     })
     .then((html) => {
-      console.log("before minify html : ", html);
       const minified_html = minify(html, {
         collapseWhitespace: true,
         minifyCSS: true,
         removeComments: true
       })
-      console.log("this is minified_html :", minified_html);
       return minified_html;
     })
     .then((html) => {
-      const file_path = 'article/a.amp.html'
-      const fileRef = storage.bucket().file(file_path);
+      // articleDataPath は一番上で定義
+      const articleHtmlDataPath = `articles/${articleDataPath}.amp.html`
+      const articleHtmlFileStorageRef = storage.bucket().file(articleHtmlDataPath);
 
-      fileRef.save(html, (err) => {
+      articleHtmlFileStorageRef.save(html, (err) => {
         if (err) {
-          console.log("writing file error", err)
+          console.log("writing file error", err);
+          throw err;
         }
         console.log("書き込み完了");
       })
@@ -92,18 +60,17 @@ const createArticleHtml = (data, context) => {
     .catch((error) => console.log("createArticleHtmlでエラーだ！てぇへんだ！", error))
 }
 
-const mdToHtml = (md_data) => {
+const mdToHtml = (mdData) => {
   return new Promise((resolve, reject) => {
     console.log("in mdToHtml");
-    const compiled_md_data = myMarked(md_data);
-    if (compiled_md_data === undefined) {
+    const compiledMdData = myMarked(mdData);
+    if (compiledMdData === undefined) {
       const error = "md parsing is something wrong"
       reject(error);
     }
     // 最後の</section>が足りないので、操作
-    html_data = compiled_md_data + '</section>';
-    console.log("Gettting article md file is success, and compiled!", html_data);
-    resolve(html_data);
+    htmlData = compiledMdData + '</section>';
+    resolve(htmlData);
   })
 }
 
@@ -118,25 +85,23 @@ const buildHtml = (data) => {
         if (error) {
           reject(error);
         }
-        console.log("html by ejs is this : ", html);
         resolve(html);
       })
   })
 }
 
 const insertAgenda = $ => {
+  console.log("in insertAgenda");
   const agenda = makeAgenda($);
-  console.log("agenda is this : ", agenda);
   return agendaToHtml(agenda)
     .then((agenda_html) => {
-      console.log("agenda_html : ", agenda_html);
       $('header.article').after(agenda_html);
       return $.html();
     }).catch(error => console.log(error));
 }
 
 const makeAgenda = $ => {
-  console.log("In makeAgenda");
+  console.log("in makeAgenda");
   const agenda = [];
   $('div.article-main section').map((_, node) =>
     agenda.push({
@@ -150,13 +115,12 @@ const makeAgenda = $ => {
 
 const agendaToHtml = (agenda) => {
   return new Promise((resolve, reject) => {
-    console.log("in agendaToHtml and agenda : ", agenda);
+    console.log("in agendaToHtml");
     ejs.renderFile('src/components/article/_agenda.ejs', {
         filename: 'src/components/article/_agenda.ejs',
         agenda: agenda
       }, 'utf-8',
       (err, html) => {
-        console.log("html is this", html);
         if (err) {
           reject(err);
         }
@@ -164,20 +128,5 @@ const agendaToHtml = (agenda) => {
       });
   });
 }
-
-//const agendaToHtml = ($, agenda) => {
-//  console.log("in agendaToHtml and agenda : ", agenda);
-//  return ejs.renderFile('src/components/article/_agenda.ejs', {
-//      filename: 'src/components/article/_agenda.ejs',
-//      agenda: agenda
-//    }, 'utf-8',
-//    (err, html) => {
-//      console.log("html is this", html);
-//      if (err) {
-//        throw err;
-//      }
-//      return html;
-//    })
-//}
 
 module.exports = createArticleHtml;

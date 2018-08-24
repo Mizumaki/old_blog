@@ -1,19 +1,21 @@
 const createArticleHtml = require("./src/createArticleHtml");
 
-const onCreate = (snap, context) => {
-  console.log('in onCreate')
+const onCreate = (snap, _) => {
+  console.log('in onCreate');
   return handleSnap(snap).then((data) => {
-    console.log('in next handle snap')
-    return createArticleHtml(data, context);
-  }).catch((error) => console.log(error))
+    return createArticleHtml(data);
+  }).catch((error) => console.log(error));
 }
 
 const handleSnap = (snap) => {
   return new Promise((resolve, reject) => {
-    console.log('in handle snap')
+    if (snap === undefined) {
+      const error = "snap is undefined"
+      reject(error);
+    }
     const data = snap.data();
     resolve(data);
-  })
+  });
 }
 
 module.exports = {
