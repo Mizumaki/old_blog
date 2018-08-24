@@ -4,14 +4,16 @@ const storage = firebase.storage;
 const express = require('express');
 const app = express();
 
-const mainCategory = '/(products|web-tech|blockchain|analysis)'
-const subCategory = '/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)'
+const mainCategory = /\/(products|web-tech|blockchain|analysis)/
+const subCategory = /\/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)/
 // メインとサブカテゴリがパスにあり、第三階層に任意の文字が1回以上続く場合に、記事と見なす
-const articlePath = mainCategory + subCategory + '/(.+)'
+const fileName = /\/.+/
+const articlePath = new RegExp(mainCategory.source + subCategory.source + fileName.source);
 
 app.get(articlePath, (req, res) => {
-  console.log('in app function and request path : ', req);
-  const file = storage.bucket().file('articles' + req + '.amp.html');
+  console.log('in app.get');
+  console.log('in app function and request path : ', req.url);
+  const file = storage.bucket().file('articles' + req.url + '.amp.html');
   const rs = file.createReadStream();
   const t0 = Date.now();
   res.set({
