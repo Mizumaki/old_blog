@@ -22,9 +22,8 @@ class AMPDocument extends React.Component {
   componentDidMount() {
     console.log("AMP Document component did mount!!!")
     this.container_.addEventListener('click', this.boundClickListener_);
-    console.log(this.props.path)
-    const path_name = this.props.path.params.path_name
-    this.fetchAndAttachAmpDoc_('/article');
+    console.log(this.props.path);
+    this.fetchAndAttachAmpDoc_(this.props.path);
   }
 
   componentWillUnmount() {
