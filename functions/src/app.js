@@ -7,8 +7,8 @@ const app = express();
 const mainCategory = /\/(products|web-tech|blockchain|analysis)/
 const subCategory = /\/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)/
 // メインとサブカテゴリがパスにあり、第三階層に任意の文字が1回以上続く場合に、記事と見なす
-const fileName = /\/.+/
-const articlePath = new RegExp(mainCategory.source + subCategory.source + fileName.source);
+const fileName = /^\/(\w|-)+$/
+const articlePath = new RegExp(/^\/(products|web-tech|blockchain|analysis)\/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)\/(\w|-)+$/);
 
 app.get(articlePath, (req, res) => {
   console.log('in app.get');

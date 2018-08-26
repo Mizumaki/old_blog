@@ -17,7 +17,7 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "/blockchain/Dapps/**",
         "function": "app"
       }
     ]

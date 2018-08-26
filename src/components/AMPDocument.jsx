@@ -22,11 +22,12 @@ class AMPDocument extends React.Component {
   componentDidMount() {
     console.log("AMP Document component did mount!!!")
     this.container_.addEventListener('click', this.boundClickListener_);
-    console.log(this.props.path);
-    this.fetchAndAttachAmpDoc_(this.props.path);
+    console.log(this.props.path.url);
+    this.fetchAndAttachAmpDoc_(this.props.path.url);
   }
 
   componentWillUnmount() {
+    console.log('in component will unmount')
     this.closeShadowAmpDoc_();
     this.container_.removeEventListener('click', this.boundClickListener_);
 
@@ -36,9 +37,41 @@ class AMPDocument extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.fetchAndAttachAmpDoc_(nextProps.src);
+  componentDidUpdate(prevProps) {
+    console.log("in compDidUpdate");
+    const prevUrl = new URL(window.location.origin + prevProps.path.url);
+    // current URL is not same as prev URL
+    if (prevUrl.pathname != window.location.pathname) {
+      //// decode precent encoding to Japanese string
+      //if (window.location.hash) {
+      //  const hash = decodeURI(window.location.hash);
+      //  console.log("hash, hash, hash", hash);
+      //  console.log("this is ref : ", this.container_.current);
+      //  this.container_.current.querySelector(hash).scrollIntoView(true);
+      //}
+      //} //else {
+      //console.log("in ELSE compDidUpdate");
+      //this.fetchAndAttachAmpDoc_(this.props.path.url);
+      console.log("in comdidup if");
+      this.fetchAndAttachAmpDoc_(this.props.path.url);
+    }
   }
+
+  //componentWillReceiveProps(nextProps) {
+  //  console.log("in comp will receive props");
+  //  const nextUrl = new URL(window.location.origin + nextProps.path.url);
+  //  if (nextUrl.pathname === window.location.pathname) {
+  //    console.log("in IF comp will receive props and nextUrl.href : ", nextUrl.href);
+  //    const hash = nextUrl.hash
+  //    if (hash) {
+  //      console.log("in IF IF comp will receive props and hash", hash);
+  //      document.querySelector(hash).scrollIntoView(true);
+  //    }
+  //  } else {
+  //    console.log("in ELSE comp will receive props");
+  //    this.fetchAndAttachAmpDoc_(nextProps.path.url);
+  //  } 
+  //}
 
   render() {
     if (this.state.offline) {
@@ -55,12 +88,15 @@ class AMPDocument extends React.Component {
   }
 
   fetchAndAttachAmpDoc_(url) {
+    console.log('in fetch and attach amp doc')
     this.fetchDocument_(url).then(doc => {
       return this.ampReadyPromise_.then(amp => {
-        //this.hideUnwantedElementsOnDocument_(doc);
+        console.log('in fetchDoc return');
+        this.hideUnwantedElementsOnDocument_(doc);
 
         const oldShadowRoot = this.shadowRoot_;
         this.shadowRoot_ = document.createElement('div');
+        this.shadowRoot_.setAttribute('id', 'shadow-root');
         if (oldShadowRoot) {
           this.container_.replaceChild(this.shadowRoot_, oldShadowRoot);
         } else {
@@ -68,23 +104,34 @@ class AMPDocument extends React.Component {
         }
 
         this.shadowAmp_ = amp.attachShadowDoc(this.shadowRoot_, doc, url);
-      });
+      })
+      //.then(() => {
+      //  if (window.location.hash) {
+      //    const hash = decodeURI(window.location.hash);
+      //    console.log("hash, hash, hash", hash);
+      //    console.log(this.shadowAmp_);
+      //    this.shadowAmp_.querySelector(hash).scrollIntoView(true);
+      //  }
+      //})
     }).catch(error => {
       this.setState({ 'offline': true });
     });
   }
 
   closeShadowAmpDoc_() {
+    console.log('in close shadow amp');
     if (typeof this.shadowAmp_.close === 'function') {
       this.shadowAmp_.close();
     }
   }
 
   hideUnwantedElementsOnDocument_(doc) {
-    const banners = doc.getElementsByClassName('banner');
+    console.log('in hide element');
+    const banners = doc.getElementsByClassName('site');
     for (let i = 0; i < banners.length; i++) {
       banners[i].style.display = 'none';
     }
+    doc.querySelector('section.agenda h4').innerHTML = "目次<span style='font-size: 12px;'>（shadowRootのサポートがないブラウザでは動きません。。）</span>"
   }
 
   fetchDocument_(url) {
@@ -119,13 +166,16 @@ class AMPDocument extends React.Component {
   }
 
   clickListener_(e) {
+    console.log('in click listner');
     if (e.defaultPrevented) {
+      console.log(' in prevent');
       return false;
     }
 
     let a = null;
 
     if (e.path) {
+      console.log("e.path : ", e.path);
       for (let i = 0; i < e.path.length; i++) {
         const node = e.path[i];
         if (node.tagName === 'A') {
@@ -136,6 +186,7 @@ class AMPDocument extends React.Component {
     } else {
       // Polyfill for `path`.
       let node = e.target;
+      console.log("node : ", node);
       while (node && node.tagName !== 'A') {
         node = node.parentNode;
       }
@@ -143,14 +194,17 @@ class AMPDocument extends React.Component {
     }
 
     if (a && a.href) {
+      console.log('in click listener if if if ');
       const url = new URL(a.href);
+      // if click target URL Domain === Site Domain 
       if (url.origin === window.location.origin) {
+        console.log('in click listener more if ');
         // Perform router push instead of page navigation.
         e.preventDefault();
         // Clean up current shadow AMP document.
         this.closeShadowAmpDoc_();
         // Router push reuses current component with new props.
-        this.props.router.push(url.pathname);
+        this.props.history.push(url.pathname);
         return false;
       }
     }

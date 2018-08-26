@@ -16,9 +16,9 @@
   <meta name="apple-mobile-web-app-capable-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
   <!-- 基本的なCSSファイルを設定 -->
-  <link rel="stylesheet" href="./reset.css">
-  <link rel="stylesheet" href="./common.css">
-  <link rel="stylesheet" href="./blog.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/common.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/blog.css">
   <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -35,9 +35,31 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Ryota Mizumaki's blog</title>
+  <script type="text/javascript">
+  function scrollToId() {
+    var indexHtmlHash = decodeURI(window.location.hash);
+    console.log("hash, hash, ", indexHtmlHash);
+    var indexHtmlShadowRoot = document.getElementById('shadow-root');
+    indexHtmlShadowRoot.shadowRoot.querySelector(indexHtmlHash).scrollIntoView(true);
+  }
+    //function startTimer() {
+//
+    //  setTimeout(onTimer, 500);
+    //}
+//
+    //function onTimer() {
+    //  if (window.location.hash) {
+    //    var indexHtmlHash = decodeURI(window.location.hash);
+    //    console.log("hash, hash, ", indexHtmlHash);
+    //    var indexHtmlShadowRoot = document.getElementById('shadow-root');
+    //    indexHtmlShadowRoot.shadowRoot.querySelector(indexHtmlHash).scrollIntoView(true);
+    //  }
+    //  setTimeout(onTimer, 500);
+    //}
+  </script>
 </head>
 
-<body>
+<body onhashchange="scrollToId();">
   <noscript>
     このサイトを閲覧するためには、Javascriptを有効にする必要があります。
   </noscript>
