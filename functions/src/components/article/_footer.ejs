@@ -1,29 +1,81 @@
-     <footer class="article">
-            <nav class="breadcrumb">
-              <ol>
-                <li>ホーム</li>
-                <li>映画</li>
-                <li>映画俳優</li>
-              </ol>
-            </nav>
-            <address>
-              <div class='writer'>
-                <!-- PC表示では、アイコンをのせるかもしれない -->
-                <!-- <div class='icon'><div class='temp'></div></div>  -->
-                <div class='detail'>
-                  <div class='about'>
-                    <h4><span class="sub">WRITTEN BY</span><br>Ryota Mizumaki</h4>
-                    <p>大学3年。最近は、solidityでブロックチェーンアプリケーション（Dapps）の開発を行っている。絶賛就活中</p>
-                    <div class='buttons'>
-                      <ul>
-                        <li><a href="" target="_blank"><img src="./icon/logo/github_white.svg" alt="Github"></a></li>
-                        <li><a href="" target="_blank" class="more-detail">詳細を見る</a></li>
-                        <li><a href="" target="_blank"><img src="./icon/logo/twitter_white.svg" alt="twitter"></a></li>
-                      </ul>
-                    </div>
-                  </div>
+<footer class="article">
+  <nav class="breadcrumb">
+    <ol>
+      <li>ホーム</li>
+      <% let mainCategory; %>
+      <% switch (category.main) {
+        case "products":
+          mainCategory = "マイプロダクト一覧"
+          break;
+        case "web-tech":
+          mainCategory = "WEB開発"
+          break;
+        case "blockchain":
+          mainCategory = "ブロックチェーン"
+          break;
+        case "analysis":
+          mainCategory = "アクセス解析"
+          break;
+        default:
+          throw new Error("パンくずリストの生成でエラー");
+          break;
+      } %>
+      <% let subCategory; %>
+      <% switch (category.sub) {
+        case "NomadTime":
+          subCategory = "ノマドタイム"
+          break;
+        case "Blazing-Fast-Blog":
+          subCategory = "ブログ"
+          break;
+        case "Cryptocurrency":
+          subCategory = "仮想通貨"
+          break;
+        case "Google-Analytics":
+          subCategory = "Googleアナリティクス"
+          break;
+        default:
+          subCategory = category.sub;
+          break;
+      } %>
+      <li><a href="/<%= category.main %>"><%= mainCategory %></a></li>
+      <li><a href="/<%= category.sub %>"><%= subCategory %></a></li>
+    </ol>
+  </nav>
+  <address>
+    <div class='writer'>
+      <!-- PC表示では、アイコンをのせるかもしれない -->
+      <!-- <div class='icon'><div class='temp'></div></div>  -->
+      <div class='detail'>
+        <div class='about'>
+          <h4><span class="sub">WRITTEN BY</span><br>Ryota Mizumaki</h4>
+          <p>大学3年。最近は、solidityでブロックチェーンアプリケーション（Dapps）の開発を行っている。絶賛就活中</p>
+          <div class='buttons'>
+            <ul>
+              <li>
+                <a href="https://github.com/Mizumaki" target="_blank">
+                  <amp-img src="/icon/logo/github_white.svg" alt="Github icon" width="2.4rem" height="4rem" layout="fixed"></amp-img>
+                </a>
+              </li>
+              <li>
+                <div class='more-detail button_base b03_skewed_slide_in'>
+                  <a href="/Who-the-F-are-you">
+                    <div>詳細を見る</div>
+                    <div></div>
+                    <div>詳細へGO</div>
+                  </a>
                 </div>
-              </div>
-            </address>
-      </footer>
+              </li>
+              <li>
+                <a href="https://twitter.com/RyotaMizumaki" target="_blank">
+                  <amp-img src="/icon/logo/twitter_white.svg" alt="Twitter icon" width="2.4rem" height="4rem" layout="fixed"></amp-img>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </address>
+</footer>
  

@@ -4,9 +4,10 @@
       <%- include('article/_header', {header: data.header, category: data.category, tags: data.tags}) %>
       <%- include('article/_article-main', {main: data.body}) %>
     </div>
-    <%- include('article/_footer') %>
+    <%- include('article/_footer', {category: data.category}) %>
   </main>
   <aside>
-    <%- include('_related-articles') %>
+    <!-- ほんとはここに、関連記事を入れる -->
+    <%# include('_related-articles') %>
   </aside>
 </article>

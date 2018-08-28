@@ -5,7 +5,7 @@ const headingTagRenderer = require('./renderer/headingTagRenderer');
 const codeTagRenderer = require('./renderer/codeTagRenderer');
 
 module.exports = function (data) {
-  return marked(data, { renderer: renderer });
+  return marked(data, { renderer: renderer, baseUrl: false });
   // 最後のsection閉じタグが足りていないことに注意
 };
 

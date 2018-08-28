@@ -1,7 +1,87 @@
-    /* 本当なら、article記事固有のものとそうでないものでわけたい */
-    /* 前の空白は、コピーの際の不具合 */
-    .amp-none {
-      display: none;
+    /* 以下、指定CSS */
+
+    /* 共通 */
+
+    /* インラインコード */
+    p > code {
+      margin: 0 .5em;
+      padding: .2em;
+      border-radius: .3em;
+      background: #103038;
+      color: #fff;
+    }
+
+    /* 文字 */
+
+    span.blue {
+      color: #7EDBEB;
+      text-shadow: 0 0 .1em, 0 0 .3em;
+    }
+
+    /* スライドアニメーションボタン */
+    /* ボタン初期位置の相対的な位置など */
+    .button_base {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      margin-top: -1.8rem;
+      margin-left: -4.5rem;
+      width: 9.2rem;
+      height: 4rem;
+    }
+
+    .b03_skewed_slide_in {
+      overflow: hidden;
+      border: 1px solid #fff;
+    }
+
+    .b03_skewed_slide_in div {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      height: 4rem;
+      padding: .8rem .7rem .8rem .9rem;
+    }
+    /* もとからあるボタン */
+    .b03_skewed_slide_in div:nth-child(1) {
+      color: inherit;
+      background-color: inherit;
+    }
+    /* スライドしてくるボタン */
+    .b03_skewed_slide_in div:nth-child(2) {
+      background-color: #fff;
+      width: 230px;
+      transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transform: translate(-250px, 0px) skewX(-30deg);
+      -webkit-transform: translate(-250px, 0px) skewX(-30deg);
+      -moz-transform: translate(-250px, 0px) skewX(-30deg);
+    }
+    /* 最終的な表示のボタン */
+    .b03_skewed_slide_in div:nth-child(3) {
+      color: #152231;
+      font-weight: bold;
+      left: -200px;
+      transition: left 0.2s ease;
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
+    }
+
+    .b03_skewed_slide_in:hover div:nth-child(2) {
+      transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transform: translate(-15px, 0px) skewX(-30deg);
+      -webkit-transform: translate(-15px, 0px) skewX(-30deg);
+      -moz-transform: translate(-15px, 0px) skewX(-30deg);
+    }
+
+    .b03_skewed_slide_in:hover div:nth-child(3) {
+      left: 0px;
+      transition: left 0.2s ease;
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
     }
 
     header.site {
@@ -16,9 +96,11 @@
       background: #152231;
       color: #ffffff;
     }
-    
+
     header.site p.site-name {
-      padding: 0 0 0 .6em;
+      padding: 0;
+      padding-right: .4em;
+      text-align: center;
       line-height: 1.5em;
     }
 
@@ -31,17 +113,30 @@
       display: none;
     }
 
+    footer.site {
+      width: 100%;
+      padding: 2rem;
+      background: #152231;
+      color: white;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    /* 記事ページ用 */
+
     article.article div.content {
       max-width: 80rem;
       margin: 0 auto;
       padding: 0 1.6rem;
     }
 
-    article.article h2 {
-      margin-bottom: .8em;
-      padding-top: .4em;
-      padding-bottom: .1em;
-      border-bottom: 1px solid #ddd;
+    article.article div.content a:hover {
+      color: #7edbeb;
+    }
+
+    nav.breadcrumb {
+      color: #808080;
+      font-weight: bold;
     }
 
     nav.breadcrumb ol::before {
@@ -49,22 +144,22 @@
       display: inline-block;
       width: 1.3em;
       height: 1.4em;
-      background-image: url(./icon/location_breadcrumb.svg);
+      background-image: url(/icon/location_breadcrumb.svg);
       background-size: contain;
       vertical-align: middle;
     }
 
-    nav.breadcrumb ol > li {
+    nav.breadcrumb ol>li {
       /* リストを横並びに */
       display: inline-block;
     }
 
-    nav.breadcrumb ol > li:not(:first-child)::before {
+    nav.breadcrumb ol>li:not(:first-child)::before {
       content: '';
       display: inline-block;
       width: 1.3em;
       height: 1.4em;
-      background-image: url(./icon/arrow_right.svg);
+      background-image: url(/icon/arrow_right.svg);
       background-size: contain;
       vertical-align: middle;
     }
@@ -77,7 +172,7 @@
       width: 100%;
       padding: 1.3rem;
       text-align: left;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
 
     header.article h1 {
@@ -122,7 +217,7 @@
       display: inline-block;
       width: 1.3em;
       height: 1.4em;
-      background-image: url(./icon/refresh.svg);
+      background-image: url(/icon/refresh.svg);
       background-size: contain;
       vertical-align: middle;
     }
@@ -158,36 +253,21 @@
       text-align: center;
     }
 
+    /* アイコン上の余白を調整 */
     div.share-buttons ul li.twitter a {
-      padding-top: 1.2rem;
+      padding-top: 1.4rem;
     }
 
     div.share-buttons ul li.facebook a {
-      padding-top: 1rem;
-    }
-
-    div.share-buttons ul li.hatena a {
-      padding-top: .7rem;
-    }
-
-    div.share-buttons ul li.pocket a {
       padding-top: 1.2rem;
     }
 
-    div.share-buttons ul li.twitter img {
-      width: 2rem;
+    div.share-buttons ul li.hatena a {
+      padding-top: .8rem;
     }
 
-    div.share-buttons ul li.facebook img {
-      width: 2.1rem;
-    }
-
-    div.share-buttons ul li.hatena img {
-      width: 3rem;
-    }
-
-    div.share-buttons ul li.pocket img {
-      width: 1.8rem;
+    div.share-buttons ul li.pocket a {
+      padding-top: 1.4rem;
     }
 
     header.article div.share-buttons {
@@ -228,12 +308,65 @@
       list-style: none;
     }
 
+    div.agenda ol.under15 {
+      font-size: 1.7rem;
+    }
+
+    div.agenda ol.over15 {
+      font-size: 1.6rem;
+    }
+
+    div.agenda ol.over17 {
+      font-size: 1.4rem;
+    }
+
+    div.agenda ol.over20{
+      font-size: 1.3rem;
+    }
+
     div.agenda ol li {
-      padding-bottom: .3em; 
+      padding-bottom: .3em;
     }
 
     div.agenda ol li::before {
       content: '- ';
+    }
+    /* h3が目次に含まれる場合 */
+    div.agenda ol li ol {
+      padding: 0 0 0 .8em;
+    }
+
+    article.article div.content div.article-main h2 {
+      margin-bottom: .8em;
+      padding-top: .4em;
+      padding-bottom: .1em;
+      border-bottom: 1px solid #ddd;
+    }
+
+    article.article div.content div.article-main h3 {
+      margin: .5em 0;
+      text-indent: 1em;
+    }
+
+    article.article div.content div.article-main h4 {
+      margin-bottom: .3em;
+    }
+
+    div.article-main a {
+      text-decoration: underline;
+      color: #12c3e2;
+    }
+
+    div.article-main a:hover {
+      text-decoration: none;
+    }
+
+    div.article-main ul {
+      padding: 1em;
+    }
+
+    div.article-main ul li {
+      margin-bottom: .5em;
     }
 
     footer.article div.writer {
@@ -257,7 +390,8 @@
       border-radius: 1rem;
     }
 
-    footer.article div.writer div.detail div.about::before, footer.article div.writer div.detail div.about::after {
+    footer.article div.writer div.detail div.about::before,
+    footer.article div.writer div.detail div.about::after {
       font-size: 5.4rem;
       font-weight: bold;
       color: #7edbed;
@@ -284,15 +418,15 @@
       text-align: center;
       font-style: italic;
       color: #f2c602;
-      text-shadow: 0 1px hsl(49,98%,38%), 0 2px hsl(49,98%,28%), 0 2px hsl(49,98%,18%), 0 3px hsl(49,98%,8%), 0 4px hsl(49,98%,3%),
-                   0 5px hsl(49,98%,1%), 0 5px 10px black;
+      text-shadow: 0 1px hsl(49, 98%, 38%), 0 2px hsl(49, 98%, 28%), 0 2px hsl(49, 98%, 18%), 0 3px hsl(49, 98%, 8%), 0 4px hsl(49, 98%, 3%),
+      0 5px hsl(49, 98%, 1%), 0 5px 10px black;
     }
 
     footer.article div.writer div.detail div.about p {
       padding: 0 6.4rem 1em 5.4rem;
       font-size: 1.6rem;
     }
-    
+
     footer.article div.writer div.detail div.about span.sub {
       font-size: 1.6rem;
       color: white;
@@ -309,13 +443,10 @@
     }
 
     footer.article div.writer div.detail div.about div.buttons ul img {
-      width: 2.4rem;
       margin-top: .7rem;
     }
 
-    footer.article div.writer div.detail div.about div.buttons ul li a.more-detail {
-      display: inline-block;
-      padding: .5em .8em;
+    footer.article div.writer div.detail div.about div.buttons ul li div.more-detail {
       border: 1px solid #fff;
       border-radius: .3em;
       font-size: 1.4rem;
@@ -337,22 +468,10 @@
     article.article div.related-articles h4 {
       color: white;
     }
-    
-    footer.site {
-      width: 100%;
-      background: #152231;
-      color: white;
-      font-size: 1.4rem;
-      text-align: center;
-    }
-
-    span.blue {
-      color: #7EDBEB;
-      text-shadow: 0 0 .1em, 0 0 .3em;
-    }
 
     /* ヘッダーナビゲーションを表示。表示するカラム数により、min-widthは変化させる必要あり。 */
-    @media (min-width: 700px) {
+
+    @media (min-width: 800px) {
       header.site {
         padding-top: 2.4rem;
         padding-bottom: 0;
@@ -370,19 +489,19 @@
         list-style: none;
         font-size: 1.6rem;
       }
-  
+
       header.site ul li {
         flex: 1 1 0;
         text-align: center;
       }
-  
+
       header.site ul li a {
         display: inline-block;
         width: 100%;
         height: 100%;
         padding: .5em;
       }
-  
+
       header.site ul li a:hover {
         /* background: hsl(212,18%,54%); */
         box-shadow: 0px 5px 1px -2px #D19445;
@@ -398,6 +517,7 @@
     }
 
     /* 目次を右に固定する場合 */
+
     @supports (display: grid) and ((position: sticky) or (position: -webkit-sticky)) {
       @media (min-width: 956px) {
         article.article div.content {
@@ -406,28 +526,24 @@
 
         article.article main div.content {
           display: grid;
-          grid-template-areas: 
-          "header header-side"
-          "main side"
-          "main side"
-          ;
+          grid-template-areas: "header header-side" "main side" "main side";
           grid-template-rows: max-content;
           grid-template-columns: minmax(720px, 80rem) minmax(220px, 30rem);
         }
-  
+
         article.article header.article {
           grid-area: header;
         }
-  
+
         article.article section.agenda {
           grid-area: side;
           padding-left: 20px;
         }
-  
+
         article.article div.article-main {
           grid-area: main;
         }
-  
+
         article.article section.agenda div.agenda {
           position: -webkit-sticky;
           position: sticky;
@@ -435,7 +551,7 @@
           right: 0;
           background: #ddd;
         }
-  
+
         article.article section.agenda div.agenda ol {
           background: #f6f6f6;
           border: none;
@@ -450,71 +566,71 @@
           padding-right: 250px;
           max-width: 986px;
         }
-  
+
         article.article section.agenda {
           position: fixed;
           top: 7rem;
           right: 1rem;
         }
-  
+
         article.article section.agenda div.agenda {
           width: 22rem;
         }
-  
+
         @media (min-width: 1016px) and (max-width: 1065px) {
           article.article div.content {
             padding-right: 280px;
             max-width: 1016px;
           }
-  
+
           article.article section.agenda div.agenda {
             width: 250px;
           }
         }
-    
+
         @media (min-width: 1066px) {
           article.article div.content {
             padding-right: 330px;
             max-width: 1066px;
           }
-  
+
           article.article section.agenda div.agenda {
             width: 300px;
           }
-  
+
           @media (min-width: 1280px) {
             article.article section.agenda {
               right: 92px;
             }
-  
+
             @media (min-width: 1366px) {
-             article.article section.agenda {
-               right: 135px;
-             }
-  
-             @media (min-width: 1440px) {
-               article.article section.agenda {
-                 right: 182px;
-               }
-  
-               @media (min-width: 1600px) {
-                 article.article section.agenda {
-                   right: 252px;
-                 }
-  
-                 @media (min-width: 1680px) {
-                   article.article section.agenda {
-                     right: 292px;
-                   }
-  
-                   @media (min-width: 1920px) {
-                     article.article section.agenda {
-                       right: 412px;
-                     }
-                   }
-                 }
-               }
-             }
+              article.article section.agenda {
+                right: 135px;
+              }
+
+              @media (min-width: 1440px) {
+                article.article section.agenda {
+                  right: 182px;
+                }
+
+                @media (min-width: 1600px) {
+                  article.article section.agenda {
+                    right: 252px;
+                  }
+
+                  @media (min-width: 1680px) {
+                    article.article section.agenda {
+                      right: 292px;
+                    }
+
+                    @media (min-width: 1920px) {
+                      article.article section.agenda {
+                        right: 412px;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

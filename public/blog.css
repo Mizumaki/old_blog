@@ -12,7 +12,8 @@ header.site {
 }
 
 header.site p.site-name {
-  padding: 0 0 0 .6em;
+  padding: 0;
+  padding-right: .4em;
   line-height: 1.5em;
 }
 
@@ -22,6 +23,7 @@ header.site ul {
 
 footer.site {
   width: 100%;
+  padding: 2rem;
   background: #152231;
   color: white;
   font-size: 1.4rem;
@@ -33,7 +35,7 @@ span.blue {
   text-shadow: 0 0 .1em, 0 0 .3em;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 800px) {
   header.site {
     padding-top: 2.4rem;
     padding-bottom: 0;

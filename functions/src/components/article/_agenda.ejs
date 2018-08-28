@@ -1,7 +1,13 @@
 <section class="agenda">
   <div class='agenda'>
     <h4>目次</h4>
-    <ol>
+    <% let count = 0 %>
+    <% agenda.forEach(function(content) {
+         count++;
+         count += content.h3.length
+    }) %>
+    <% const olClass = (count < 16) ? "under15" : (count < 18) ? "over15" : (count < 21) ? "over17" : "over20"; %>
+    <ol class="<%= olClass %>">
       <% agenda.forEach(function (content) { %>
         <% const h2 = content.h2 %>
         <% if (content.h3.length == 0) { %>
