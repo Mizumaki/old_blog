@@ -18,6 +18,11 @@
       text-shadow: 0 0 .1em, 0 0 .3em;
     }
 
+    /* サイトネームを、WEBフォントで表示 */
+    p.site-name span.blazing-fast {
+      font-family: 'Orbitron', sans-serif;
+    }
+
     /* スライドアニメーションボタン */
     /* ボタン初期位置の相対的な位置など */
     .button_base {
@@ -104,6 +109,9 @@
       line-height: 1.5em;
     }
 
+    header.site p.pwa::before {
+      content: "💎";
+    }
 
     header.site p.amp::before {
       content: "⚡";
@@ -458,6 +466,10 @@
       padding: 1.5rem 4rem;
       text-align: right;
       font-size: 1.6rem;
+    }
+
+    footer.article nav.breadcrumb a:hover {
+      color: #7edbeb;
     }
 
     article.article div.related-articles {

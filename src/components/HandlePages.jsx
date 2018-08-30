@@ -4,8 +4,8 @@ import ArticleList from './ArticleList';
 import AMPDocument from './AMPDocument';
 
 const HandlePages = (props) => {
-  const mainCategory = '/:main(products|web-tech|blockchain|analysis)'
-  const subCategory = '/:sub(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)'
+  const mainCategory = '/:main(products|front-end|server-side|blockchain|analysis)'
+  const subCategory = '/:sub(NomadTime|Blazing-Fast-Blog|React|PWA-AMP|HTML-CSS-JS|Firebase|Nodejs|Ruby|Java|Dapps|Cryptocurrency|Google-Analytics)'
   // メインとサブカテゴリがパスにあり、第三階層に任意の文字が1回以上続く場合に、記事と見なす
   const articlePath = mainCategory + subCategory + '/:fileName(.+)'
 

@@ -28,7 +28,6 @@ class AMPDocument extends React.Component {
 
   componentWillUnmount() {
     console.log('in component will unmount')
-    this.closeShadowAmpDoc_();
     this.container_.removeEventListener('click', this.boundClickListener_);
 
     if (this.xhr_) {

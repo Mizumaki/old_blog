@@ -4,11 +4,7 @@ const storage = firebase.storage;
 const express = require('express');
 const app = express();
 
-const mainCategory = /\/(products|web-tech|blockchain|analysis)/
-const subCategory = /\/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)/
-// メインとサブカテゴリがパスにあり、第三階層に任意の文字が1回以上続く場合に、記事と見なす
-const fileName = /^\/(\w|-)+$/
-const articlePath = new RegExp(/^\/(products|web-tech|blockchain|analysis)\/(Blog|React|PWA-AMP|Firebase|Dev|Dapps|CryptoCurrency|Google-Analytics)\/(\w|-)+$/);
+const articlePath = new RegExp(/^\/(products|front-end|server-side|blockchain|analysis)\/(NomadTime|Blazing-Fast-Blog|React|PWA-AMP|HTML-CSS-JS|Firebase|Nodejs|Ruby|Java|Dapps|CryptoCurrency|Google-Analytics)\/(\w|-)+$/);
 
 app.get(articlePath, (req, res) => {
   console.log('in app.get');

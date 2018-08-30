@@ -11,6 +11,19 @@ header.site {
   color: #ffffff;
 }
 
+/* サイトネームを、WEBフォントで表示 */
+p.site-name span.blazing-fast {
+  font-family: 'Orbitron', sans-serif;
+}
+
+header.site p.pwa::before {
+  content: "💎";
+}
+
+header.site p.amp::before {
+  content: "⚡";
+}
+
 header.site p.site-name {
   padding: 0;
   padding-right: .4em;

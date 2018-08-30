@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { Link } from 'react-router-dom';
 import { Shadow } from '../styles/css';
 
 const styles = StyleSheet.create({
@@ -38,14 +39,18 @@ const styles = StyleSheet.create({
 const ArticleList = () => {
   return (
     <div className={css(styles.wrap)}>
-      <div className={css(styles.blogCard)}>
-        <div className={css(styles.category)}><p>React</p></div>
-        <h2 className={css(styles.title)}>ジェイソンステイサムはかっこいい</h2>
-        <p className={css(styles.lead)}>ついに結婚が決定したジェイソン・ステイサム。
+      <Link to="/blockchain/Dapps/Truffle-pet-shop-tutorial">
+        <div className={css(styles.blogCard)}>
+          <div className={css(styles.category)}><p>React</p></div>
+          <h2 className={css(styles.title)}>ジェイソンステイサムはかっこいい</h2>
+          <p className={css(styles.lead)}>
+          ついに結婚が決定したジェイソン・ステイサム。
           これからもますます、"輝く"アクションスター
           としての地位を確立していくであろう、ステイサム。
-          彼の魅力に迫ります。</p>
-      </div>
+          彼の魅力に迫ります。
+          </p>
+        </div>
+      </Link>
     </div>
   );
 }

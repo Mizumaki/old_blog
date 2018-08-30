@@ -1,47 +1,5 @@
 <header class="article">
-  <nav class="breadcrumb">
-    <ol>
-      <li><a href="/">ホーム</a></li>
-      <% let mainCategory; %>
-      <% switch (category.main) {
-        case "products":
-          mainCategory = "マイプロダクト一覧"
-          break;
-        case "web-tech":
-          mainCategory = "WEB開発"
-          break;
-        case "blockchain":
-          mainCategory = "ブロックチェーン"
-          break;
-        case "analysis":
-          mainCategory = "アクセス解析"
-          break;
-        default:
-          throw new Error("パンくずリストの生成でエラー");
-          break;
-      } %>
-      <% let subCategory; %>
-      <% switch (category.sub) {
-        case "NomadTime":
-          subCategory = "ノマドタイム"
-          break;
-        case "Blazing-Fast-Blog":
-          subCategory = "ブログ"
-          break;
-        case "Cryptocurrency":
-          subCategory = "仮想通貨"
-          break;
-        case "Google-Analytics":
-          subCategory = "Googleアナリティクス"
-          break;
-        default:
-          subCategory = category.sub;
-          break;
-      } %>
-      <li><a href="/<%= category.main %>" target="_blank"><%= mainCategory %></a></li>
-      <li><a href="/<%= category.sub %>" target="_blank"><%= subCategory %></a></li>
-    </ol>
-  </nav>
+  <%- include('_breadcrumb', {category: category}) %>
   <h1><%= header.title %></h1>
   <div class='information'>
     <ul class='tags'>

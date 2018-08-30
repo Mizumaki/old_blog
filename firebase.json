@@ -17,7 +17,47 @@
     ],
     "rewrites": [
       {
+        "source": "/products/NomadTime/**",
+        "function": "app"
+      },
+      {
+        "source": "/products/Blazing-Fast-Blog/**",
+        "function": "app"
+      },
+      {
+        "source": "/front-end/React/**",
+        "function": "app"
+      },
+      {
+        "source": "/front-end/HTML-CSS-JS/**",
+        "function": "app"
+      },
+      {
+        "source": "/server-side/Firebase/**",
+        "function": "app"
+      },
+      {
+        "source": "/server-side/Node.js/**",
+        "function": "app"
+      },
+      {
+        "source": "/server-side/Ruby/**",
+        "function": "app"
+      },
+      {
+        "source": "/server-side/Java/**",
+        "function": "app"
+      },
+      {
         "source": "/blockchain/Dapps/**",
+        "function": "app"
+      },
+      {
+        "source": "/blockchain/Cryptocurrency/**",
+        "function": "app"
+      },
+      {
+        "source": "/analysis/Google-Analytics/**",
         "function": "app"
       }
     ]
