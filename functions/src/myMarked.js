@@ -5,7 +5,7 @@ const headingTagRenderer = require('./renderer/headingTagRenderer');
 const codeTagRenderer = require('./renderer/codeTagRenderer');
 
 module.exports = function (data) {
-  return marked(data, { renderer: renderer, baseUrl: false });
+  return marked(data, { renderer: renderer });
   // 最後のsection閉じタグが足りていないことに注意
 };
 
@@ -15,4 +15,8 @@ renderer.heading = function (text, level) {
 
 renderer.code = function (code, language, escaped) {
   return codeTagRenderer(code, language, escaped);
+};
+
+renderer.link = function (href, title, text) {
+  return `<a target="_blank" href="${ href }" title="${ title }">${ text }</a>`;
 };

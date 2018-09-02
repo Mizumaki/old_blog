@@ -8,3 +8,14 @@ exports.createNewFile = functions.firestore.document('articles/{docName}')
   .onCreate((snap, context) => {
     return handleDbDataChange.onCreate(snap, context);
   })
+
+exports.changeFile = functions.firestore.document('articles/{docName}')
+  .onUpdate((change, context) => {
+    // updateであっても、現状はonCreateと動作変わらず。
+    return handleDbDataChange.onUpdate(change, context);
+  })
+
+exports.deleteFile = functions.firestore.document('articles/{docName}')
+  .onDelete((snap, context) => {
+    return handleDbDataChange.onDelete(snap, context);
+  })
