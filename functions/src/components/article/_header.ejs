@@ -10,8 +10,8 @@
       <%  }); %>
     </ul>
     <div class='last-update-date'>
-      <% const dateSlash = update.toDate().toLocaleDateString('ja-JP'); %>
-      <% const dateHyphen = dateSlash.replace(/\//g,'-'); %>
+      <% const dateHyphen = update.toDate().toLocaleDateString('ja-JP'); %>
+      <% const dateSlash = dateHyphen.replace(/-/g,'/'); %>
       <time datetime="<%= dateHyphen %>"><%= dateSlash %></time>
     </div>
   </div>
