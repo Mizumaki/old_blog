@@ -17,48 +17,60 @@
     ],
     "rewrites": [
       {
-        "source": "/products/NomadTime/**",
+        "source": "/products/NomadTime/*",
         "function": "app"
       },
       {
-        "source": "/products/Blazing-Fast-Blog/**",
+        "source": "/products/Blazing-Fast-Blog/*",
         "function": "app"
       },
       {
-        "source": "/front-end/React/**",
+        "source": "/front-end/React/*",
         "function": "app"
       },
       {
-        "source": "/front-end/HTML-CSS-JS/**",
+        "source": "/front-end/HTML-CSS-JS/*",
         "function": "app"
       },
       {
-        "source": "/server-side/Firebase/**",
+        "source": "/front-end/PWA-AMP/*",
         "function": "app"
       },
       {
-        "source": "/server-side/Node.js/**",
+        "source": "/server-side/Firebase/*",
         "function": "app"
       },
       {
-        "source": "/server-side/Ruby/**",
+        "source": "/server-side/Node.js/*",
         "function": "app"
       },
       {
-        "source": "/server-side/Java/**",
+        "source": "/server-side/Ruby/*",
         "function": "app"
       },
       {
-        "source": "/blockchain/Dapps/**",
+        "source": "/server-side/Java/*",
         "function": "app"
       },
       {
-        "source": "/blockchain/Cryptocurrency/**",
+        "source": "/blockchain/Dapps/*",
         "function": "app"
       },
       {
-        "source": "/analysis/Google-Analytics/**",
+        "source": "/blockchain/Cryptocurrency/*",
         "function": "app"
+      },
+      {
+        "source": "/analysis/Google-Analytics/*",
+        "function": "app"
+      },
+      {
+        "source": "/api/**",
+        "function": "api"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html" 
       }
     ]
   },

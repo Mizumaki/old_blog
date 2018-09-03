@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <header className="site">
       <Link to="/">
-        <p class="site-name pwa">
-          <span class="blazing-fast">BLAZING FAST</span>
+        <p className="site-name pwa">
+          <span className="blazing-fast">BLAZING FAST</span>
           {/* <!-- <br><span class="blue">　~ 神速 ~</span>  --> */}
         </p>
       </Link>

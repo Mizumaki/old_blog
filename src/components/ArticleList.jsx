@@ -1,55 +1,25 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { Link } from 'react-router-dom';
-import { Shadow } from '../styles/css';
+import BlogCard from './BlogCard';
 
 const styles = StyleSheet.create({
   wrap: {
     padding: '3rem 1rem',
   },
-  blogCard: {
-    maxWidth: '70rem',
-    margin: '0 auto',
-    border: '1px solid grey',
-    borderRadius: '.5rem',
-    padding: '3rem',
-    ':hover': {
-      ...Shadow.z2,
-      transition: '.2s'
-    },
-  },
-  category: {
-    display: 'inline-block',
-    padding: '.3em 1em',
-    marginBottom: '1em',
-    fontSize: '1.4rem',
-    borderRadius: '.3rem',
-  },
-  title: {
-    marginBottom: '1em',
-    fontSize: '2.4rem',
-  },
-  lead: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    color: 'grey',
-  },
 });
 
 const ArticleList = () => {
+  const articleData = {
+    "title": "トリュフのペットショップチュートリアルをやる",
+    "subCategory": "Dapps",
+    "lead": "SolidityとTruffleを使った開発になれるため、16匹のペットを売買するペットショップサイトを開設してみましょう。",
+    "date": "2018/09/03"
+  }
   return (
     <div className={css(styles.wrap)}>
       <Link to="/blockchain/Dapps/Truffle-pet-shop-tutorial">
-        <div className={css(styles.blogCard)}>
-          <div className={css(styles.category)}><p>React</p></div>
-          <h2 className={css(styles.title)}>ジェイソンステイサムはかっこいい</h2>
-          <p className={css(styles.lead)}>
-          ついに結婚が決定したジェイソン・ステイサム。
-          これからもますます、"輝く"アクションスター
-          としての地位を確立していくであろう、ステイサム。
-          彼の魅力に迫ります。
-          </p>
-        </div>
+        <BlogCard title={articleData.title} subCategory={articleData.subCategory} lead={articleData.lead} date={articleData.date} />
       </Link>
     </div>
   );

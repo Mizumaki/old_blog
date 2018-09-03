@@ -1,15 +1,17 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Blazing Fast 神速ブログ",
+  "short_name": "Blazing Fast",
+  "description": "日々学んだことを発信する技術ブログです。",
+  "lang": "ja-JP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#152231",
+  "background_color": "#152231",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }
