@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 import ArticleList from './ArticleList';
 import AMPDocument from './AMPDocument';
+import TopPage from './TopPage';
 
 class HandlePages extends React.Component {
   constructor(props) {
@@ -38,9 +39,10 @@ class HandlePages extends React.Component {
     const articlePath = mainCategory + subCategory + '/:fileName(.+)'
     return (
       <div>
-        <Route exact path="/" render={() => <ArticleList />} />
-        <Route exact path={mainCategory} render={({match}) => <ArticleList type="category" subType="main" query={match.params.main} />} />
-        <Route exact path={mainCategory + subCategory} render={({match}) => <ArticleList type="category" subType="sub" query={match.params.sub} />} />
+        <Route exact path="/" render={() => <TopPage />} />
+        <Route exact path="/tags" render={(location) => <ArticleList type="tags" query={this.props.location.search}  />} />
+        <Route exact path={mainCategory} render={({ match }) => <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />} />
+        <Route exact path={mainCategory + subCategory} render={({ match }) => <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />} />
         <Route path={articlePath} render={({ match }) => <AMPDocument path={match} context={this.context} />} />
       </div>
     );

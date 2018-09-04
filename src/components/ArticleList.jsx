@@ -17,7 +17,7 @@ class Articlelist extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`https://ryota-mizumaki.com/api/article-list/${this.props.type}/${this.props.subType}?name=${this.props.query}`)
+    fetch(`https://ryota-mizumaki.com/api/article-list/${this.props.type}${this.props.subType ? "/" + this.props.subType : ""}${this.props.query}`)
       .catch((err) => { throw Error(err); }) // ネットワークなどのリクエスト以前のエラー処理
       .then((res) => handleResponseErrors(res))
       .then((res) => {
