@@ -17,7 +17,7 @@ exports.changeFile = functions.firestore.document('articles/{docName}')
     return handleDbDataChange.onUpdate(change, context);
   })
 
-exports.deleteFile = functions.firestore.document('articles/{docName}')
+exports.deleteFile = functions.firestore.document('{collectionName}/{docName}')
   .onDelete((snap, context) => {
     return handleDbDataChange.onDelete(snap, context);
   })

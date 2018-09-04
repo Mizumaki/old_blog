@@ -38,7 +38,9 @@ class HandlePages extends React.Component {
     const articlePath = mainCategory + subCategory + '/:fileName(.+)'
     return (
       <div>
-        <Route exact path="/" render={() => <ArticleList path="/" />} />
+        <Route exact path="/" render={() => <ArticleList />} />
+        <Route exact path={mainCategory} render={({match}) => <ArticleList type="category" subType="main" query={match.params.main} />} />
+        <Route exact path={mainCategory + subCategory} render={({match}) => <ArticleList type="category" subType="sub" query={match.params.sub} />} />
         <Route path={articlePath} render={({ match }) => <AMPDocument path={match} context={this.context} />} />
       </div>
     );
