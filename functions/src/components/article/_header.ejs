@@ -18,22 +18,23 @@
   <div class="share-buttons">
     <ul>
       <li class="twitter">
-        <a href="" target="_blank" rel="noopener">
+      <% const myUrl = `https://ryota-mizumaki.com/${category.main}/${category.sub}/${file_name}` %>
+        <a href="http://twitter.com/share?url=<%= myUrl %>" target="_blank" rel="noopener">
           <amp-img src="/icon/logo/twitter_white.svg" alt="Twitter icon" width="2rem" height="1.7rem" layout="fixed"></amp-img>
         </a>
       </li>
       <li class="facebook">
-        <a href="" target="_blank" rel="noopener">
+        <a href="http://www.facebook.com/sharer/sharer.php?u=<%= myUrl %>" target="_blank" rel="noopener">
           <amp-img src="/icon/logo/facebook.svg" alt="Facebook icon" width="2rem" height="2.1rem" layout="fixed">
         </a>
       </li>
       <li class="hatena">
-        <a href="" target="_blank" rel="noopener">
+        <a href="http://b.hatena.ne.jp/entry/s/<%= myUrl %>" target="_blank" rel="noopener">
           <amp-img src="/icon/logo/hatenabookmark.svg" alt="はてなブログ icon" width="3.2rem" height="3.2rem" layout="fixed">
         </a>
       </li>
       <li class="pocket">
-        <a href="" target="_blank" rel="noopener">
+        <a href="https://getpocket.com/edit?url=<%= myUrl %>" target="_blank" rel="noopener">
           <amp-img src="/icon/logo/pocket_white.svg" alt="Pocket" width="1.8rem" height="1.6rem" layout="fixed"></amp-img>
         </a>
       </li>

@@ -6,8 +6,17 @@
   <link rel="canonical" href="/articles/template.amp.html" />
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="description" content="<%= data.header.lead %>">
+  <meta name="author" content="Ryota Mizumaki">
+  <!-- 対象年齢の指定 -->
+  <meta name="rating" content="General">
   <meta name="keywords" content="<%- data.tags.join() %>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <!-- SNS用OGPタグ -->
+  <meta property="og:title" content="<%= data.header.title %>" />
+  <meta property="og:description" content="<%= data.header.lead %>" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:site" content="@RyotaMizumaki">
+  <meta name="twitter:card" content="summary">
   <!-- カスタムフォント -->
   <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
   <%- include('css/_amp-boilerplate') %>

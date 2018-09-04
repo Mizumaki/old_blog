@@ -1,7 +1,7 @@
 <article class="article">
   <main role="main">
     <div class='content'>
-      <%- include('article/_header', {header: data.header, date: data.date, update: data.update, category: data.category, tags: data.tags}) %>
+      <%- include('article/_header', {header: data.header, date: data.date, update: data.update, category: data.category, tags: data.tags, file_name: data.file_name}) %>
       <%- include('article/_article-main', {main: data.body}) %>
     </div>
     <%- include('article/_footer', {category: data.category}) %>
