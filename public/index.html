@@ -8,7 +8,7 @@
     if (window.location.hostname !== 'localhost') {
       console.log("in script ga");
       window.dataLayer = window.dataLayer || [];
-    
+
       function gtag() {
         dataLayer.push(arguments);
         console.log("in gtag");
@@ -22,6 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="application-name" content="BLAZING FAST BLOG">
   <meta name="description" content="水牧稜太のブログ">
+  <meta name="author" content="Ryota Mizumaki">
   <!-- 対象年齢の指定 -->
   <meta name="rating" content="General">
   <!-- スタンドアローンモードでのサイトの起動を許可 -->
@@ -30,6 +31,10 @@
   <!-- スタンドアローンモードでのステータスバーのデザインを指定 -->
   <meta name="apple-mobile-web-app-capable-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#152231">
+  <!-- SNS用OGPタグ 一部保留 -->
+  <meta property="og:type" content="article" />
+  <meta name="twitter:site" content="@RyotaMizumaki">
+  <meta name="twitter:card" content="summary">
   <!-- カスタムフォント -->
   <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
   <!-- 基本的なCSSファイルを設定 -->
@@ -49,17 +54,17 @@
     -->
   <title>Blazing Fast Blog</title>
   <script type="text/javascript">
-  function scrollToId() {
-    var indexHtmlHash = decodeURI(window.location.hash);
-    console.log("hash, hash, ", indexHtmlHash);
-    var indexHtmlShadowRoot = document.getElementById('shadow-root');
-    indexHtmlShadowRoot.shadowRoot.querySelector(indexHtmlHash).scrollIntoView(true);
-  }
+    function scrollToId() {
+      var indexHtmlHash = decodeURI(window.location.hash);
+      console.log("hash, hash, ", indexHtmlHash);
+      var indexHtmlShadowRoot = document.getElementById('shadow-root');
+      indexHtmlShadowRoot.shadowRoot.querySelector(indexHtmlHash).scrollIntoView(true);
+    }
     //function startTimer() {
-//
+    //
     //  setTimeout(onTimer, 500);
     //}
-//
+    //
     //function onTimer() {
     //  if (window.location.hash) {
     //    var indexHtmlHash = decodeURI(window.location.hash);
