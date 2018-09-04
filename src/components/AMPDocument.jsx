@@ -28,7 +28,10 @@ class AMPDocument extends React.Component {
 
   componentWillUnmount() {
     console.log('in component will unmount')
-    this.container_.removeEventListener('click', this.boundClickListener_);
+    // if null, you can't removeEventListener
+    if (this.container_ !== null) {
+      this.container_.removeEventListener('click', this.boundClickListener_);
+    }
 
     if (this.xhr_) {
       this.xhr_.abort();

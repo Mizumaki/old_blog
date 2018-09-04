@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { Link } from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 import BlogCard from './BlogCard';
 import handleResponseErrors from './handleResponseErrors';
 
@@ -13,10 +14,14 @@ const styles = StyleSheet.create({
 class Articlelist extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { articles: [] };
+    this.state = { articles: [], title: "Blazing Fast Blog" };
   }
 
   componentDidMount() {
+    const query = this.props.query;
+    const queryName = query.replace('?name=', '');
+    const title = `「${queryName}」の記事一覧`
+
     fetch(`https://ryota-mizumaki.com/api/article-list/${this.props.type}${this.props.subType ? "/" + this.props.subType : ""}${this.props.query}`)
       .catch((err) => { throw Error(err); }) // ネットワークなどのリクエスト以前のエラー処理
       .then((res) => handleResponseErrors(res))
@@ -24,7 +29,7 @@ class Articlelist extends React.Component {
         console.log('in fetch success');
         return res.json();
       })
-      .then((articles) => this.setState({ articles: articles }))
+      .then((articles) => this.setState({ articles: articles, title: title }))
       .catch((err) => console.log("There has been error in fetch operation: ", err.message))
   }
 
@@ -40,7 +45,7 @@ class Articlelist extends React.Component {
         })
         .then((articles) => this.setState({ articles: articles }))
         .catch((err) => console.log("There has been error in fetch operation: ", err.message))
-    } else {console.log('else')}
+    } else { console.log('else') }
   }
 
   render() {
@@ -56,9 +61,11 @@ class Articlelist extends React.Component {
     });
 
     return (
-      <div>
-        {blogCards}
-      </div>
+      <DocumentTitle title={this.state.title}>
+        <div>
+          {blogCards}
+        </div>
+      </DocumentTitle>
     );
   }
 }
