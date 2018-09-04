@@ -6,7 +6,7 @@
     <% console.log('in tags') %>
       <% tags.forEach(function(tag) { %>
       <% console.log('in foreach') %>
-      <li class='tag'><a href="/articles?tags=<%= tag %>" rel="tag"><%= tag %></a></li>
+      <li class='tag'><a href="/tags?name=<%= tag %>" rel="tag"><%= tag %></a></li>
       <%  }); %>
     </ul>
     <div class='last-update-date'>
