@@ -20,3 +20,7 @@ renderer.code = function (code, language, escaped) {
 renderer.link = function (href, title, text) {
   return `<a target="_blank" href="${ href }" title="${ title }">${ text }</a>`;
 };
+
+renderer.image = function (href, title, text) {
+  return `<img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" title="${text}" alt="${text}">`;
+}
