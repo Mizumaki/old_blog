@@ -23,6 +23,7 @@ module.exports = function (code, file_name, escaped) {
         highlighted_code = Prism.highlight(code, Prism.languages.jsx, language);
         break;
       case '.html':
+      case '.ejs':
         language = 'markup'
         highlighted_code = Prism.highlight(code, Prism.languages.markup, language);
         break;

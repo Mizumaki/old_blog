@@ -18,7 +18,11 @@ renderer.code = function (code, language, escaped) {
 };
 
 renderer.link = function (href, title, text) {
-  return `<a target="_blank" href="${ href }" title="${ title }">${ text }</a>`;
+  if (title) {
+    return `<a target="_blank" href="${ href }" title="${ title }">${ text }</a>`;
+  } else {
+    return `<a target="_blank" href="${ href }">${ text }</a>`;
+  }
 };
 
 renderer.image = function (href, title, text) {

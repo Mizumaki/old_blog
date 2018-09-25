@@ -59,22 +59,6 @@ class AMPDocument extends React.Component {
     }
   }
 
-  //componentWillReceiveProps(nextProps) {
-  //  console.log("in comp will receive props");
-  //  const nextUrl = new URL(window.location.origin + nextProps.path.url);
-  //  if (nextUrl.pathname === window.location.pathname) {
-  //    console.log("in IF comp will receive props and nextUrl.href : ", nextUrl.href);
-  //    const hash = nextUrl.hash
-  //    if (hash) {
-  //      console.log("in IF IF comp will receive props and hash", hash);
-  //      document.querySelector(hash).scrollIntoView(true);
-  //    }
-  //  } else {
-  //    console.log("in ELSE comp will receive props");
-  //    this.fetchAndAttachAmpDoc_(nextProps.path.url);
-  //  } 
-  //}
-
   render() {
     if (this.state.offline) {
       return (
@@ -107,14 +91,6 @@ class AMPDocument extends React.Component {
 
         this.shadowAmp_ = amp.attachShadowDoc(this.shadowRoot_, doc, url);
       })
-      //.then(() => {
-      //  if (window.location.hash) {
-      //    const hash = decodeURI(window.location.hash);
-      //    console.log("hash, hash, hash", hash);
-      //    console.log(this.shadowAmp_);
-      //    this.shadowAmp_.querySelector(hash).scrollIntoView(true);
-      //  }
-      //})
     }).catch(error => {
       this.setState({ 'offline': true });
     });
@@ -170,7 +146,7 @@ class AMPDocument extends React.Component {
   clickListener_(e) {
     console.log('in click listner');
     if (e.defaultPrevented) {
-      console.log(' in prevent');
+      console.log('in prevent');
       return false;
     }
 

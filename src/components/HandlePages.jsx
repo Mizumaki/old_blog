@@ -43,7 +43,7 @@ class HandlePages extends React.Component {
         <Route exact path="/tags" render={(location) => <ArticleList type="tags" query={this.props.location.search}  />} />
         <Route exact path={mainCategory} render={({ match }) => <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />} />
         <Route exact path={mainCategory + subCategory} render={({ match }) => <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />} />
-        <Route path={articlePath} render={({ match }) => <AMPDocument path={match} context={this.context} />} />
+        <Route path={articlePath} render={({ match }) => <AMPDocument path={match} />} />
       </div>
     );
   }

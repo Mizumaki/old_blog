@@ -8,7 +8,7 @@ module.exports = function (text, level) {
             <section id="${id}">
             <h1>${text}</h1>
           `;
-      // h2の場合
+    // h2の場合
     case 2:
       id = text.replace(/\s/g, '-')
       return `
@@ -16,6 +16,7 @@ module.exports = function (text, level) {
             <section id="${id}">
             <h2>${text}</h2>
           `;
+    // h3の場合
     case 3:
       id = text.replace(/\s/g, '-')
       return `
