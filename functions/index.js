@@ -1,9 +1,9 @@
 const functions = require('firebase-functions');
-const app = require('./src/app');
+const amp = require('./src/amp');
 const api = require('./src/api');
 const handleDbDataChange = require('./handleDbDataChange');
 
-exports.app = functions.https.onRequest(app);
+exports.amp = functions.https.onRequest(amp);
 exports.api = functions.https.onRequest(api);
 
 exports.createNewFile = functions.firestore.document('articles/{docName}')
