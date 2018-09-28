@@ -12,7 +12,7 @@ if (workbox) {
   workbox.routing.registerNavigationRoute('/index.html');
   
   workbox.routing.registerRoute(
-    regPath.articlePageHtml,
+    new RegExp('/amp/.*'),
     workbox.strategies.staleWhileRevalidate({
       cacheName: 'article-amp-html',
       plugins: [
@@ -62,5 +62,5 @@ if (workbox) {
   );
 
 } else {
-  console.log(`失敗しちまった😬😬😬`);
+  console.log(`WorkBoxのロードに失敗😬😬😬`);
 }

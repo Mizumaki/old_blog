@@ -23,7 +23,7 @@ class AMPDocument extends React.Component {
     console.log("AMP Document component did mount!!!")
     this.container_.addEventListener('click', this.boundClickListener_);
     console.log(this.props.path.url);
-    this.fetchAndAttachAmpDoc_(this.props.path.url);
+    this.fetchAndAttachAmpDoc_('/amp' + this.props.path.url);
   }
 
   componentWillUnmount() {
@@ -44,16 +44,6 @@ class AMPDocument extends React.Component {
     const prevUrl = new URL(window.location.origin + prevProps.path.url);
     // current URL is not same as prev URL
     if (prevUrl.pathname != window.location.pathname) {
-      //// decode precent encoding to Japanese string
-      //if (window.location.hash) {
-      //  const hash = decodeURI(window.location.hash);
-      //  console.log("hash, hash, hash", hash);
-      //  console.log("this is ref : ", this.container_.current);
-      //  this.container_.current.querySelector(hash).scrollIntoView(true);
-      //}
-      //} //else {
-      //console.log("in ELSE compDidUpdate");
-      //this.fetchAndAttachAmpDoc_(this.props.path.url);
       console.log("in comdidup if");
       this.fetchAndAttachAmpDoc_(this.props.path.url);
     }
@@ -153,7 +143,6 @@ class AMPDocument extends React.Component {
     let a = null;
 
     if (e.path) {
-      console.log("e.path : ", e.path);
       for (let i = 0; i < e.path.length; i++) {
         const node = e.path[i];
         if (node.tagName === 'A') {
@@ -182,13 +171,12 @@ class AMPDocument extends React.Component {
         // Clean up current shadow AMP document.
         this.closeShadowAmpDoc_();
         // Router push reuses current component with new props.
-        this.props.history.push(url.pathname);
+        this.props.history.push({ pathname: url.pathname, search: url.hash });
         return false;
       }
     }
-
     return true;
   }
 }
-//AMPDocument.propTypes = { src: React.PropTypes.string.isRequired }
+
 export default withRouter(AMPDocument);
