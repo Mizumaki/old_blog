@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="site">
-      ©2018 RYOTA MIZUMAKI
+      <a href="/">©2018 RYOTA MIZUMAKI</a>
     </footer>
   );
 }

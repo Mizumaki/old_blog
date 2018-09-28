@@ -171,7 +171,7 @@ class AMPDocument extends React.Component {
         // Clean up current shadow AMP document.
         this.closeShadowAmpDoc_();
         // Router push reuses current component with new props.
-        this.props.history.push({ pathname: url.pathname, search: url.hash });
+        this.props.history.push({ pathname: url.pathname, search: url.search });
         return false;
       }
     }

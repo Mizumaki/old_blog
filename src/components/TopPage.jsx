@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet } from 'aphrodite';
 import { Link } from 'react-router-dom';
 
 const styles = StyleSheet.create({
