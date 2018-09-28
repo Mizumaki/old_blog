@@ -10,9 +10,9 @@
       <%  }); %>
     </ul>
     <div class='last-update-date'>
-      <% const dateHyphen = update.toDate().toLocaleDateString('ja-JP'); %>
-      <% const dateSlash = dateHyphen.replace(/-/g,'/'); %>
-      <time datetime="<%= dateHyphen %>"><%= dateSlash %></time>
+      <% const date = update.toDate(); %>
+      <% const dateString = `${date.getFullYear();}/${date.getMonth() + 1;}/${date.getDate();}`; %>
+      <time datetime="<%= dateHyphen %>"><%= dateString %></time>
     </div>
   </div>
   <div class="share-buttons">
