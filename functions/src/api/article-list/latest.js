@@ -19,7 +19,7 @@ const handleResponse = (req, res) => {
 
 const getArticleList = (count) => {
   return new Promise((resolve, reject) => {
-    firestore.collection('articles').orderBy('date').limit(parseInt(count, 10)).get()
+    firestore.collection('articles').orderBy('date', 'desc').limit(parseInt(count, 10)).get()
       .then((querySnapshot) => {
         let statham = [];
         querySnapshot.forEach((doc) => {
