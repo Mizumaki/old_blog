@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Route } from 'react-router-dom';
+import { Route } from 'react-router-dom'
+import DocumentTitle from 'react-document-title';
 import ArticleList from './ArticleList';
 import AMPDocument from './AMPDocument';
 import TopPage from './TopPage';
@@ -39,11 +40,34 @@ class HandlePages extends React.Component {
     const articlePath = mainCategory + subCategory + '/:fileName(.+)'
     return (
       <div>
-        <Route exact path="/" render={() => <TopPage />} />
-        <Route exact path="/tags" render={(location) => <ArticleList type="tags" query={this.props.location.search}  />} />
-        <Route exact path={mainCategory} render={({ match }) => <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />} />
-        <Route exact path={mainCategory + subCategory} render={({ match }) => <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />} />
-        <Route path={articlePath} render={({ match }) => <AMPDocument path={match} />} />
+        <Route exact path="/" render={() =>
+          <DocumentTitle title="BLAZING FAST">
+            <TopPage />
+          </DocumentTitle>
+        } />
+
+        <Route exact path="/tags" render={(location) =>
+          <DocumentTitle title={"タグ：" + this.props.location.search.replace('?name=', '') + " の記事一覧"}>
+            <ArticleList type="tags" query={this.props.location.search} />
+          </DocumentTitle>
+        } />
+
+        <Route exact path={mainCategory} render={({ match }) =>
+          <DocumentTitle title={"カテゴリ：" + match.params.main + " の記事一覧"}>
+            <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />
+          </DocumentTitle>
+        } />
+
+        <Route exact path={mainCategory + subCategory} render={({ match }) =>
+          <DocumentTitle title={"カテゴリ：" + match.params.sub + " の記事一覧"}>
+            <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />
+          </DocumentTitle>
+        } />
+
+        <Route path={articlePath} render={({ match }) =>
+          // タイトルはドキュメントを取得してから付与
+            <AMPDocument path={match} />
+        } />
       </div>
     );
   }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import DocumentTitle from 'react-document-title';
 
 class AMPDocument extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 'offline': false };
+    this.state = { offline: false, title: 'BLAZING FAST' };
 
     // Shadow AMP API が利用可能になったかどうかを判断
     this.ampReadyPromise_ = new Promise(resolve => {
@@ -52,14 +53,20 @@ class AMPDocument extends React.Component {
   render() {
     if (this.state.offline) {
       return (
-        <div>
-          <h2>Ground Control to Major Tom</h2>
-          <p>Your Internet Connection is dead. There's something wrong.</p>
-          <p>Can you hear me, Major Tom?</p>
-        </div>
+        <DocumentTitle title={this.state.title}>
+          <div>
+            <h2>Ground Control to Major Tom</h2>
+            <p>Your Internet Connection is dead. There's something wrong.</p>
+            <p>Can you hear me, Major Tom?</p>
+          </div>
+        </DocumentTitle>
       );
     } else {
-      return (<div ref={ref => this.container_ = ref} />);
+      return (
+        <DocumentTitle title={this.state.title}>
+          <div ref={ref => this.container_ = ref} />
+        </DocumentTitle>
+      );
     }
   }
 
@@ -82,7 +89,7 @@ class AMPDocument extends React.Component {
         this.shadowAmp_ = amp.attachShadowDoc(this.shadowRoot_, doc, url);
       })
     }).catch(error => {
-      this.setState({ 'offline': true });
+      this.setState({ offline: true });
     });
   }
 
@@ -91,6 +98,13 @@ class AMPDocument extends React.Component {
     if (typeof this.shadowAmp_.close === 'function') {
       this.shadowAmp_.close();
     }
+  }
+
+  setTitle_(doc) {
+    console.log('in set title');
+    const h1 = doc.getElementsByClassName('h1');
+    const title = h1[0];
+    this.setState({ title: title });
   }
 
   hideUnwantedElementsOnDocument_(doc) {

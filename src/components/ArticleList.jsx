@@ -61,11 +61,9 @@ class Articlelist extends React.Component {
     });
 
     return (
-      <DocumentTitle title={this.state.title}>
-        <div>
-          {blogCards}
-        </div>
-      </DocumentTitle>
+      <div>
+        {blogCards}
+      </div>
     );
   }
 }
