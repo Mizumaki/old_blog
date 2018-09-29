@@ -11,8 +11,9 @@
     </ul>
     <div class='last-update-date'>
       <% const date = update.toDate(); %>
-      <% const dateString = `${date.getFullYear();}/${date.getMonth() + 1;}/${date.getDate();}`; %>
-      <time datetime="<%= dateHyphen %>"><%= dateString %></time>
+      <% const dateHyphen = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`; %>
+      <% const dateSlash = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`; %>
+      <time datetime="<%= dateHyphen %>"><%= dateSlash %></time>
     </div>
   </div>
   <div class="share-buttons">

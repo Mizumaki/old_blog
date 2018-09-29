@@ -13,7 +13,7 @@ amp.get('/amp/:mainCategory/:subCategory/:articleName', (req, res) => {
   const rs = file.createReadStream();
   const t0 = Date.now();
   res.set({
-    "Cache-Control": "max-age=300, s-maxage=31536000",
+    //"Cache-Control": "max-age=300",
     "Content-Type": "text/html; charset=utf-8"
   });
   rs.pipe(res);

@@ -76,7 +76,7 @@ class AMPDocument extends React.Component {
       return this.ampReadyPromise_.then(amp => {
         console.log('in fetchDoc return');
         this.hideUnwantedElementsOnDocument_(doc);
-
+        this.setTitle_(doc);
         const oldShadowRoot = this.shadowRoot_;
         this.shadowRoot_ = document.createElement('div');
         this.shadowRoot_.setAttribute('id', 'shadow-root');
@@ -102,8 +102,8 @@ class AMPDocument extends React.Component {
 
   setTitle_(doc) {
     console.log('in set title');
-    const h1 = doc.getElementsByClassName('h1');
-    const title = h1[0];
+    const h1 = doc.getElementsByTagName('h1');
+    const title = h1[0].textContent;
     this.setState({ title: title });
   }
 

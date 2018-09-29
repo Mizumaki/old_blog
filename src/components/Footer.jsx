@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className="site">
-      <a href="/">©2018 RYOTA MIZUMAKI</a>
+      <Link to="/">©2018 RYOTA MIZUMAKI</Link>
     </footer>
   );
 }

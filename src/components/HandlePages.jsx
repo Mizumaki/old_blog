@@ -46,7 +46,7 @@ class HandlePages extends React.Component {
           </DocumentTitle>
         } />
 
-        <Route exact path="/tags" render={(location) =>
+        <Route exact path="/tags" render={() =>
           <DocumentTitle title={"タグ：" + this.props.location.search.replace('?name=', '') + " の記事一覧"}>
             <ArticleList type="tags" query={this.props.location.search} />
           </DocumentTitle>

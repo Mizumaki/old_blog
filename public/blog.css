@@ -1,3 +1,17 @@
+/* 追加したスタイル */
+body {
+  min-height: 100vh;
+}
+
+div#root {
+  min-height: 100vh;
+}
+
+div#shadow-root {
+  cursor: default;
+}
+
+/* CSS from AMP */
 header.site {
   display: flex;
   flex-direction: column;
