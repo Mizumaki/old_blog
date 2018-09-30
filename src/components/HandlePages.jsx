@@ -3,8 +3,10 @@ import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom'
 import DocumentTitle from 'react-document-title';
 import ArticleList from './ArticleList';
+import CategoryList from './CategoryList';
 import AMPDocument from './AMPDocument';
 import TopPage from './TopPage';
+import MySelfPage from './MySelfPage';
 
 class HandlePages extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class HandlePages extends React.Component {
 
     // actionがPUSHかつ、gtagがfunction、つまりlocalhostでない場合
     if (prevHistory.action === 'PUSH' && typeof (gtag) === 'function') {
-      console.log('in gtag func')
+      console.log('in gtag func');
       console.log(this.props.location.pathname);
       gtag('config', 'UA-124960219-1', {
         //'page_location': window.location.href,
@@ -46,27 +48,40 @@ class HandlePages extends React.Component {
           </DocumentTitle>
         } />
 
+        <Route exact path="/Who-the-F-are-you" render={() =>
+          <MySelfPage />
+        } />
+
         <Route exact path="/tags" render={() =>
-          <DocumentTitle title={"タグ：" + this.props.location.search.replace('?name=', '') + " の記事一覧"}>
-            <ArticleList type="tags" query={this.props.location.search} />
-          </DocumentTitle>
+          <div>
+            <DocumentTitle title={"タグ：" + this.props.location.search.replace('?name=', '') + " の記事一覧"}>
+              <ArticleList type="tags" query={this.props.location.search} />
+            </DocumentTitle>
+            <CategoryList />
+          </div>
         } />
 
         <Route exact path={mainCategory} render={({ match }) =>
-          <DocumentTitle title={"カテゴリ：" + match.params.main + " の記事一覧"}>
-            <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />
-          </DocumentTitle>
+          <div>
+            <DocumentTitle title={"カテゴリ：" + match.params.main + " の記事一覧"}>
+              <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />
+            </DocumentTitle>
+            <CategoryList />
+          </div>
         } />
 
         <Route exact path={mainCategory + subCategory} render={({ match }) =>
-          <DocumentTitle title={"カテゴリ：" + match.params.sub + " の記事一覧"}>
-            <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />
-          </DocumentTitle>
+          <div>
+            <DocumentTitle title={"カテゴリ：" + match.params.sub + " の記事一覧"}>
+              <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />
+            </DocumentTitle>
+            <CategoryList />
+          </div>
         } />
 
         <Route path={articlePath} render={({ match }) =>
           // タイトルはドキュメントを取得してから付与
-            <AMPDocument path={match} />
+          <AMPDocument path={match} />
         } />
       </div>
     );
