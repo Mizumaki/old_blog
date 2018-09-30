@@ -31,8 +31,9 @@ const onDelete = (snap, context) => {
         case 'articles':
           // if onDelete is in articles collection
           return tags.forEach((tag) => {
+            // TODO: 本当は、thenで結んでからでないといけない。別の関数に切り出すべき
             firestore.collection('tags').doc(tag).collection('articles').doc(docName).delete();
-            console.log(`${docName} in tags collection is deleted!`)
+            console.log(`${docName} in tags collection is deleted!`);
           });
         case 'tags':
           // if onDelete is in tags collection
