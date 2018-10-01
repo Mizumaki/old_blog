@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import { Helmet } from 'react-helmet';
 import DocumentTitle from 'react-document-title';
 
 class AMPDocument extends React.Component {
@@ -55,6 +56,9 @@ class AMPDocument extends React.Component {
       return (
         <DocumentTitle title={this.state.title}>
           <div>
+            <Helmet>
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.path.url}`} />
+            </Helmet>
             <h2>Ground Control to Major Tom</h2>
             <p>Your Internet Connection is dead. There's something wrong.</p>
             <p>Can you hear me, Major Tom?</p>
@@ -64,7 +68,12 @@ class AMPDocument extends React.Component {
     } else {
       return (
         <DocumentTitle title={this.state.title}>
-          <div ref={ref => this.container_ = ref} />
+          <div>
+            <Helmet>
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.path.url}`} />
+            </Helmet>
+            <div ref={ref => this.container_ = ref} />
+          </div>
         </DocumentTitle>
       );
     }

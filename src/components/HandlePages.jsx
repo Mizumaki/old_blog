@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import DocumentTitle from 'react-document-title';
 import ArticleList from './ArticleList';
 import CategoryList from './CategoryList';
@@ -79,9 +79,16 @@ class HandlePages extends React.Component {
           </div>
         } />
 
-        <Route path={articlePath} render={({ match }) =>
+        <Route exact path={articlePath} render={({ match }) =>
           // タイトルはドキュメントを取得してから付与
           <AMPDocument path={match} />
+        } />
+
+        <Route exact path={"/amp" + articlePath} render={(match) => {
+          console.log("Redirect to non AMP page!");
+          const params = match.params
+          return (<Redirect to={`/${params.main}/${params.sub}/${params.fileName}`} />)
+        }
         } />
       </div>
     );
