@@ -84,10 +84,9 @@ class HandlePages extends React.Component {
           <AMPDocument path={match} />
         } />
 
-        <Route exact path={"/amp" + articlePath} render={(match) => {
-          console.log("Redirect to non AMP page!");
-          const params = match.params
-          return (<Redirect to={`/${params.main}/${params.sub}/${params.fileName}`} />)
+        <Route exact path={"/amp" + articlePath} render={({ match }) => {
+          console.log("Redirect to non AMP page 👼");
+          return <Redirect to={`/${match.params.main}/${match.params.sub}/${match.params.fileName}`} />
         }
         } />
       </div>
