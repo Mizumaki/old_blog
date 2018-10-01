@@ -3,6 +3,8 @@ const marked = require('marked');
 const renderer = new marked.Renderer();
 const headingTagRenderer = require('./renderer/headingTagRenderer');
 const codeTagRenderer = require('./renderer/codeTagRenderer');
+const firebase = require('./firebase');
+const storage = firebase.storage;
 
 module.exports = function (data) {
   return marked(data, { renderer: renderer });
@@ -26,5 +28,12 @@ renderer.link = function (href, title, text) {
 };
 
 renderer.image = function (href, title, text) {
-  return `<img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" title="${text}" alt="${text}">`;
+  storage.bucket().file("img/" + href).get().then((data) => {
+    console.log(data);
+    console.log(data.naturalWidth);
+    console.log(data.naturalHeight);
+    const width = data.naturalWidth;
+    const height = data.naturalHeight;
+    return `<amp-img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" width="${width}" height="${height}" title="${text}" alt="${text}">`;
+  }).catch((error) => { throw error;})
 }
