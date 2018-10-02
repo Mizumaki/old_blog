@@ -29,7 +29,6 @@ class HandlePages extends React.Component {
       console.log('in gtag func');
       console.log(this.props.location.pathname);
       gtag('config', 'UA-124960219-1', {
-        //'page_location': window.location.href,
         'page_path': this.props.location.pathname
       });
     }
@@ -55,7 +54,7 @@ class HandlePages extends React.Component {
         <Route exact path="/tags" render={() =>
           <div>
             <DocumentTitle title={"タグ：" + this.props.location.search.replace('?name=', '') + " の記事一覧"}>
-              <ArticleList type="tags" query={this.props.location.search} />
+              <ArticleList />
             </DocumentTitle>
             <CategoryList />
           </div>
@@ -64,7 +63,7 @@ class HandlePages extends React.Component {
         <Route exact path={mainCategory} render={({ match }) =>
           <div>
             <DocumentTitle title={"カテゴリ：" + match.params.main + " の記事一覧"}>
-              <ArticleList type="category" subType="main" query={"?name=" + match.params.main} />
+              <ArticleList />
             </DocumentTitle>
             <CategoryList />
           </div>
@@ -73,20 +72,20 @@ class HandlePages extends React.Component {
         <Route exact path={mainCategory + subCategory} render={({ match }) =>
           <div>
             <DocumentTitle title={"カテゴリ：" + match.params.sub + " の記事一覧"}>
-              <ArticleList type="category" subType="sub" query={"?name=" + match.params.sub} />
+              <ArticleList />
             </DocumentTitle>
             <CategoryList />
           </div>
         } />
 
-        <Route exact path={articlePath} render={({ match }) =>
+        <Route exact path={articlePath} render={() =>
           // タイトルはドキュメントを取得してから付与
-          <AMPDocument path={match} />
+          <AMPDocument />
         } />
 
-        <Route exact path={"/amp" + articlePath} render={({ match }) => {
+        <Route exact path={"/amp" + articlePath} render={({ match, location }) => {
           console.log("Redirect to non AMP page 👼");
-          return <Redirect to={`/${match.params.main}/${match.params.sub}/${match.params.fileName}`} />
+          return <Redirect to={`/${match.params.main}/${match.params.sub}/${match.params.fileName}${location.hash ? location.hash : ""}`} />
         }
         } />
       </div>

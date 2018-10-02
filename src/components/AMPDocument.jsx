@@ -24,8 +24,9 @@ class AMPDocument extends React.Component {
   componentDidMount() {
     console.log("AMP Document component did mount!!!")
     this.container_.addEventListener('click', this.boundClickListener_);
-    console.log(this.props.path.url);
-    this.fetchAndAttachAmpDoc_('/amp' + this.props.path.url);
+    console.log(this.props.match.url);
+    const params = this.props.match.params;
+    this.fetchAndAttachAmpDoc_(`/amp/${params.main}/${params.sub}/${params.fileName}`);
   }
 
   componentWillUnmount() {
@@ -43,11 +44,14 @@ class AMPDocument extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log("in compDidUpdate");
-    const prevUrl = new URL(window.location.origin + prevProps.path.url);
+    console.log("prev is this", prevProps.match.url);
+    console.log("now is this", this.props.match.url);
+    const prevUrl = new URL(window.location.origin + prevProps.match.url);
     // current URL is not same as prev URL
-    if (prevUrl.pathname != window.location.pathname) {
+    if (prevProps.match.url != this.props.match.url) {
       console.log("in comdidup if");
-      this.fetchAndAttachAmpDoc_(this.props.path.url);
+      const params = this.props.match.params;
+      this.fetchAndAttachAmpDoc_(`/amp/${params.main}/${params.sub}/${params.fileName}`);
     }
   }
 
@@ -57,7 +61,7 @@ class AMPDocument extends React.Component {
         <DocumentTitle title={this.state.title}>
           <div>
             <Helmet>
-              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.path.url}`} />
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp/${this.props.location.pathname}`} />
             </Helmet>
             <h2>Ground Control to Major Tom</h2>
             <p>Your Internet Connection is dead. There's something wrong.</p>
@@ -70,7 +74,7 @@ class AMPDocument extends React.Component {
         <DocumentTitle title={this.state.title}>
           <div>
             <Helmet>
-              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.path.url}`} />
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp/${this.props.location.pathname}`} />
             </Helmet>
             <div ref={ref => this.container_ = ref} />
           </div>
@@ -85,7 +89,6 @@ class AMPDocument extends React.Component {
       return this.ampReadyPromise_.then(amp => {
         console.log('in fetchDoc return');
         this.hideUnwantedElementsOnDocument_(doc);
-        this.setTitle_(doc);
         const oldShadowRoot = this.shadowRoot_;
         this.shadowRoot_ = document.createElement('div');
         this.shadowRoot_.setAttribute('id', 'shadow-root');
@@ -94,8 +97,10 @@ class AMPDocument extends React.Component {
         } else {
           this.container_.appendChild(this.shadowRoot_);
         }
-
+        
         this.shadowAmp_ = amp.attachShadowDoc(this.shadowRoot_, doc, url);
+        // 全部が完了してから、setTitleすることで、compDidUpdateがトリガーされそれ以降の処理を止めるようなことがないようにする。
+        this.setTitle_(doc);
       })
     }).catch(error => {
       this.setState({ offline: true });
@@ -194,7 +199,7 @@ class AMPDocument extends React.Component {
         // Clean up current shadow AMP document.
         this.closeShadowAmpDoc_();
         // Router push reuses current component with new props.
-        this.props.history.push({ pathname: url.pathname, search: url.search });
+        this.props.history.push({ pathname: url.pathname, search: url.search, hash: url.hash });
         return false;
       }
     }
