@@ -34,6 +34,6 @@ renderer.image = function (href, title, text) {
     console.log(data.naturalHeight);
     const width = data.naturalWidth;
     const height = data.naturalHeight;
-    return `<amp-img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" width="${width}" height="${height}" title="${text}" alt="${text}">`;
+    return `<amp-img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" width="${width}" height="${height}" layout="responsive" title="${text}" alt="${text}">`;
   }).catch((error) => { throw error;})
 }

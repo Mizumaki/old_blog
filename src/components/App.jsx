@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import ScrollToTop from './ScrollToTop';
 import Header from './Header';
 import HandlePages from './HandlePages';
 import Footer from './Footer';
@@ -20,7 +21,9 @@ const App = () => {
     <div className={css(styles.wrap)}>
       <Header />
       <div className={css(styles.main)}>
-        <HandlePages />
+        <ScrollToTop>
+          <HandlePages />
+        </ScrollToTop>
       </div>
       <Footer />
     </div>

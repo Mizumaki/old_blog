@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import ArticleList from './ArticleList';
 import CategoryList from './CategoryList';
