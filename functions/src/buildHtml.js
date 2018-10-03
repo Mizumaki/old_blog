@@ -108,7 +108,7 @@ function build(data) {
     const $ = cheerio.load(builded_html, {
       decodeEntities: true
     });
-    // headerは別途生成しているので、markedで生成したものは削除
+    // headerは別途生成するので、markedで生成したものは削除
     $('#header').remove();
 
     let agenda = []

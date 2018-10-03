@@ -28,12 +28,13 @@ renderer.link = function (href, title, text) {
 };
 
 renderer.image = function (href, title, text) {
-  storage.bucket().file("img/" + href).get().then((data) => {
-    console.log(data);
-    console.log(data.naturalWidth);
-    console.log(data.naturalHeight);
-    const width = data.naturalWidth;
-    const height = data.naturalHeight;
+  storage.bucket().file("img/" + href).getMetadata().then((data) => {
+    const metadata = data[0];
+    console.log(metadata);
+    console.log(metadata.metadata.width);
+    console.log(metadata.metadata.height);
+    const width = metadata.metadata.width;
+    const height = metadata.metadata.height;
     return `<amp-img href="https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${href}" width="${width}" height="${height}" layout="responsive" title="${text}" alt="${text}">`;
   }).catch((error) => { throw error;})
 }
