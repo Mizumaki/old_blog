@@ -61,7 +61,7 @@ class AMPDocument extends React.Component {
         <DocumentTitle title={this.state.title}>
           <div>
             <Helmet>
-              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp/${this.props.location.pathname}`} />
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.location.pathname}`} />
             </Helmet>
             <h2>Ground Control to Major Tom</h2>
             <p>Your Internet Connection is dead. There's something wrong.</p>
@@ -74,7 +74,7 @@ class AMPDocument extends React.Component {
         <DocumentTitle title={this.state.title}>
           <div>
             <Helmet>
-              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp/${this.props.location.pathname}`} />
+              <link rel="amphtml" href={`https://ryota-mizumaki.com/amp${this.props.location.pathname}`} />
             </Helmet>
             <div ref={ref => this.container_ = ref} />
           </div>
