@@ -1,4 +1,3 @@
-const fs = require('fs');
 const ejs = require('ejs');
 const cheerio = require('cheerio');
 const minify = require('html-minifier').minify;
@@ -11,17 +10,16 @@ const createArticleHtml = (DATA) => {
   console.log("in createArticle Html");
   const category = DATA.category
   const articleDataPath = `${category.main}/${category.sub}/${DATA.file_name}`;
-  const articleMdDataPath = `md_articles/${articleDataPath}.md`;
-  const articleMdFileStorageRef = storage.bucket().file(articleMdDataPath);
-  console.log("it is awesome statham version!!")
-  return articleMdFileStorageRef.download()
-    .then((mdFileData) => {
-      console.log("data[0].toString is this :", mdFileData[0].toString('utf-8'));
-      const mdTextData = mdFileData[0].toString('utf-8');
+  const mdStoragePath = `md_articles/${articleDataPath}.md`;
+  const mdStorageRef = storage.bucket().file(mdStoragePath);
+
+  return mdStorageRef.download()
+    .then((data) => {
+      const mdTextData = data[0].toString('utf-8');
       return mdTextData;
     })
-    .then((mdData) => {
-      return mdToHtml(mdData);
+    .then((mdTextData) => {
+      return mdToHtml(mdTextData);
     })
     .then((bodyHtml) => {
       DATA.body = bodyHtml;
@@ -29,11 +27,15 @@ const createArticleHtml = (DATA) => {
     })
     .then((html) => {
       // htmlのテキストデータを、htmlファイルのように扱えるようにする。
-      return cheerio.load(html,{decodeEntities: true}, (err) => {throw err;});
+      return cheerio.load(html, {
+        decodeEntities: true
+      }, (err) => {
+        throw err;
+      });
     })
     .then(($) => {
       $('#header').remove();
-      return insertAgenda($);
+      return handleHtml($); //insertAgenda($);
     })
     .then((html) => {
       const minified_html = minify(html, {
@@ -90,14 +92,51 @@ const buildHtml = (data) => {
   })
 }
 
+const handleHtml = $ => {
+  return new Promise((resolve, reject) => {
+    addInfoToAmpImgs($)
+      .then(() => resolve(insertAgenda($)))
+      .catch(err => reject(err))
+  })
+}
+
+const addInfoToAmpImgs = $ => {
+  return new Promise((resolve, reject) => {
+    console.log('in addInfoToAmpImgs');
+    const ampImgs = $('article.article div.content div.article-main amp-img');
+    const srcs = ampImgs.map((_, node) => {
+      return $(node).attr('src');
+    }).get();
+    const getInfoAndAdd = (src) => {
+      return storage.bucket().file("img/" + src).getMetadata().then((data) => {
+        const metadata = data[0];
+        console.log(metadata);
+        console.log(metadata.metadata.width);
+        console.log(metadata.metadata.height);
+        const width = metadata.metadata.width;
+        const height = metadata.metadata.height;
+        ampImgs.each((_, node) => {
+          $(node).attr('src', `https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${src}`);
+          $(node).attr('width', width);
+          $(node).attr('height', height);
+        })
+        return;
+      }).catch((err) => reject(err))
+    }
+    resolve(Promise.all(srcs.map((src) => getInfoAndAdd(src))));
+  })
+}
+
 const insertAgenda = $ => {
-  console.log("in insertAgenda");
-  const agenda = makeAgenda($);
-  return agendaToHtml(agenda)
-    .then((agenda_html) => {
-      $('header.article').after(agenda_html);
-      return $.html();
-    }).catch(error => console.log(error));
+  return new Promise((resolve, reject) => {
+    console.log("in insertAgenda");
+    const agenda = makeAgenda($);
+    agendaToHtml(agenda)
+      .then((agenda_html) => {
+        $('header.article').after(agenda_html);
+        return resolve($.html());
+      }).catch(error => reject(error));
+  })
 }
 
 const makeAgenda = $ => {
