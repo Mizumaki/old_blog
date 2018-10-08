@@ -42,13 +42,15 @@ class HandlePages extends React.Component {
     return (
       <div>
         <Route exact path="/" render={() =>
-          <DocumentTitle title="BLAZING FAST">
+          <DocumentTitle title="BLAZING FAST Top Page">
             <TopPage />
           </DocumentTitle>
         } />
 
         <Route exact path="/Who-the-F-are-you" render={() =>
-          <MySelfPage />
+          <DocumentTitle title="Mizumaki Ryota - 自己紹介">
+            <MySelfPage />
+          </DocumentTitle>
         } />
 
         <Route exact path="/tags" render={() =>

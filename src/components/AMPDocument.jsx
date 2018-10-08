@@ -123,6 +123,8 @@ class AMPDocument extends React.Component {
 
   hideUnwantedElementsOnDocument_(doc) {
     console.log('in hide element');
+    const ga = doc.getElementById('googleanalytics');
+    ga.parentNode.removeChild(ga);
     const banners = doc.getElementsByClassName('site');
     for (let i = 0; i < banners.length; i++) {
       banners[i].style.display = 'none';
