@@ -107,7 +107,8 @@ const addInfoToAmpImgs = $ => {
     const srcs = ampImgs.map((_, node) => {
       return $(node).attr('src');
     }).get();
-    const getInfoAndAdd = (src) => {
+    const getInfoAndAdd = (node) => {
+      const src = $(node).attr('src');
       return storage.bucket().file("img/" + src).getMetadata().then((data) => {
         const metadata = data[0];
         console.log(metadata);
@@ -115,15 +116,13 @@ const addInfoToAmpImgs = $ => {
         console.log(metadata.metadata.height);
         const width = metadata.metadata.width;
         const height = metadata.metadata.height;
-        ampImgs.each((_, node) => {
-          $(node).attr('src', `https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${src}`);
-          $(node).attr('width', width);
-          $(node).attr('height', height);
-        })
+        $(node).attr('src', `https://storage.googleapis.com/blog-2e0d2.appspot.com/img/${src}`);
+        $(node).attr('width', width);
+        $(node).attr('height', height);
         return;
       }).catch((err) => reject(err))
     }
-    resolve(Promise.all(srcs.map((src) => getInfoAndAdd(src))));
+    resolve(Promise.all(ampImgs.map((_, node) => getInfoAndAdd(node)).get()));
   })
 }
 
