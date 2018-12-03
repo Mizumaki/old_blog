@@ -24,8 +24,6 @@ class Comments extends React.Component<any> {
             {item.comment}
           </li>
         ))}
-        {/*
-        */}
       </ul>
     );
   }
