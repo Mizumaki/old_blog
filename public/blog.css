@@ -1,0 +1,96 @@
+/* 追加したスタイル */
+body {
+  min-height: 100vh;
+}
+
+div#root {
+  min-height: 100vh;
+}
+
+div#shadow-root {
+  cursor: default;
+}
+
+/* CSS from AMP */
+header.site {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 5rem;
+  padding: 1.2rem;
+  box-shadow: 0px 1px 5px 1px #87CEEB;
+  background: #152231;
+  color: #ffffff;
+}
+
+/* サイトネームを、WEBフォントで表示 */
+p.site-name span.blazing-fast {
+  font-family: 'Orbitron', sans-serif;
+}
+
+header.site p.pwa::before {
+  content: "💎";
+}
+
+header.site p.amp::before {
+  content: "⚡";
+}
+
+header.site p.site-name {
+  padding: 0;
+  padding-right: .4em;
+  line-height: 1.5em;
+}
+
+header.site ul {
+  display: none;
+}
+
+footer.site {
+  width: 100%;
+  padding: 2rem;
+  background: #152231;
+  color: white;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+span.blue {
+  color: #7EDBEB;
+  text-shadow: 0 0 .1em, 0 0 .3em;
+}
+
+@media (min-width: 800px) {
+  header.site {
+    padding-top: 2.4rem;
+    padding-bottom: 0;
+  }
+  header.site p {
+    font-size: 2rem;
+  }
+  header.site ul {
+    display: flex;
+    width: 100%;
+    max-width: 112rem;
+    padding-top: 2rem;
+    list-style: none;
+    font-size: 1.6rem;
+  }
+  header.site ul li {
+    flex: 1 1 0;
+    text-align: center;
+  }
+  header.site ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: .5em;
+  }
+  header.site ul li a:hover {
+    box-shadow: 0px 5px 1px -2px #D19445;
+    color: #D19445;
+    transition: .3s;
+  }
+}
