@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import commentsReducer, { ICommentsState } from './comments/index';
-import commentsFetchEpic from './comments/epics';
+import commentsReducer, { ICommentsState, commentsFetchEpic } from './comments/index';
+import articleListsReducer, { IStates as IArticleListsStates, articleListsEpic } from './articleList/index';
 
 export interface IAppState {
-  comments: ICommentsState
+  comments: ICommentsState,
+  articleLists: IArticleListsStates,
 }
 
-export const reducers = combineReducers<IAppState>({ comments: commentsReducer })
+export const reducers = combineReducers<IAppState>({ comments: commentsReducer, articleLists: articleListsReducer })
 
 export const epics = combineEpics(
-  commentsFetchEpic
+  commentsFetchEpic,
+  articleListsEpic
 );

@@ -56,7 +56,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "ducks": "bash -c 'mkdir src/states/ducks/$FOLDER && touch src/states/ducks/$FOLDER/{actions.ts,epics.ts,index.ts,operations.ts,reducers.ts,selectors.ts}'"
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
@@ -64,6 +65,7 @@
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",
+    "@types/react-router-dom": "^4.3.1",
     "typescript": "^3.1.6",
     "workbox-cli": "^3.6.3"
   },

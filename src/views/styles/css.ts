@@ -1,6 +1,6 @@
 // import { Color } from './colors';
 // Menu が開く、閉じるでのトランスフォーム
-export const menu_transform = {
+export const menuTransform = {
   open: {
     transform: 'translate(200px, 0)', // 初期では左に -200px の場所に存在するものを、右に200px移動する
     transitionDuration: '300ms',

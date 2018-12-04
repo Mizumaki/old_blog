@@ -1,0 +1,23 @@
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+const Header = () => {
+  return (
+    <header className="site">
+      <Link to="/">
+        <p className="site-name pwa">
+          <span className="blazing-fast">BLAZING FAST</span>
+        </p>
+      </Link>
+      <ul>
+        <li><Link to="/front-end/PWA-AMP">AMP / PWA</Link></li>
+        <li><Link to="/front-end/React">React</Link></li>
+        <li><Link to="/blockchain">ブロックチェーン</Link></li>
+        <li><Link to="/front-end/Firebase">Firebase</Link></li>
+        <li><Link to="/server-side">Node.js / Ruby / Java</Link></li>
+      </ul>
+    </header>
+  );
+}
+
+export default Header;
