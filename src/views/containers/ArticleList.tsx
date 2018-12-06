@@ -1,17 +1,19 @@
 import { Action, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { articleListsOperations, articleListsSelectors, IStates } from '../../states/ducks/articleList/index';
-import { ArticleList as Component } from '../components/ArticleList';
+import { articleListsOperations, articleListsSelectors, IStates, IApi } from '../../states/ducks/articleList/index';
+import Component from '../components/ArticleList';
 import { IAppState } from '../../states/ducks/index';
 
 export interface IProps extends RouteComponentProps<{ main: string; sub: string; }>, IStates {
   fetch: (url: string) => Action<string>;
 }
 
+export { IApi };
+
 const mapStateToProps = (appState: IAppState, ownProps: RouteComponentProps<{ main: string; sub: string; }>) => {
   const regularStates = articleListsSelectors.getRegularStates(appState);
-  return {...regularStates, ...ownProps}
+  return { ...regularStates, ...ownProps }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action<string>>) => {

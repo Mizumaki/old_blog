@@ -1,11 +1,11 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import actions from './actions';
-import { ILists } from './epics';
+import { IApi } from './epics';
 
 export interface IStates {
   hasError: boolean;
   isLoading: boolean;
-  lists: ILists[];
+  lists: IApi[];
 }
 
 const initialState: IStates = {

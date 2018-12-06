@@ -10,7 +10,7 @@ interface IPayloadAction extends Action {
   payload?: any;
 }
 
-export interface ILists {
+export interface IApi {
   date: string;
   lead: string;
   path: string;
@@ -23,7 +23,7 @@ const fetchEpic: Epic<IPayloadAction> = (actions$) => actions$.pipe(
   mergeMap((action: IPayloadAction) => concat(
     of(actions.loading({ isLoading: true })),
     ajax.getJSON(action.payload.url).pipe(
-      map((lists: ILists[]) => actions.fetch.done({ params: action.payload.url, result: { lists } })),
+      map((lists: IApi[]) => actions.fetch.done({ params: action.payload.url, result: { lists } })),
       catchError(_ => of(actions.fetch.failed({ params: action.payload.url, error: { hasError: true } }))),
     ),
     of(actions.loading({ isLoading: false })),

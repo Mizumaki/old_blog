@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { IProps as IContainerProps } from '../containers/ArticleList';
-import { ILists } from '../../states/ducks/articleList/epics';
+import { IProps as IContainerProps, IApi } from '../containers/ArticleList';
 import BlogCard from './BlogCard';
 
 const styles = {
@@ -17,7 +16,7 @@ interface IOwnProps {
 
 type IProps = IOwnProps & IContainerProps
 
-export class ArticleList extends React.Component<IProps> {
+class ArticleList extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.fetchArticleList = this.fetchArticleList.bind(this);
@@ -54,7 +53,7 @@ export class ArticleList extends React.Component<IProps> {
       return <div>error</div>;
     }
     const articles = this.props.lists
-    const blogCards = articles.map((article: ILists, i: number) => {
+    const blogCards = articles.map((article: IApi, i: number) => {
       return (
         <div className={styles.wrap} key={i}>
           <BlogCard title={article.title} subCategory={article.subCategory} lead={article.lead} date={article.date} path={article.path} />

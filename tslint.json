@@ -10,6 +10,8 @@
   "rules": {
     "ordered-imports": [false],
     "object-literal-sort-keys": [false],
-    "no-console": [false]
+    "no-console": [false],
+    "variable-name": [false],
+    "prefer-for-of": [false]
   }
 }
