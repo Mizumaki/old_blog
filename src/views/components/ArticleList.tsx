@@ -17,7 +17,7 @@ interface IOwnProps {
 
 type IProps = IOwnProps & IContainerProps
 
-class ArticleList extends React.Component<IProps> {
+export class ArticleList extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.fetchArticleList = this.fetchArticleList.bind(this);
