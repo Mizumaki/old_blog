@@ -20,6 +20,8 @@
     "noUnusedLocals": true
   },
   "exclude": [
+    "functions",
+    "src/sw.js",
     "node_modules",
     "build",
     "scripts",

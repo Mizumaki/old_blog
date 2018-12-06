@@ -1,0 +1,30 @@
+<!doctype html>
+<html ⚡ lang="ja">
+
+<%- include('components/_head', {data: data}); %>
+
+<body>
+<amp-analytics type="googleanalytics" id="googleanalytics">
+  <script type="application/json">
+  {
+    "vars": {
+      "account": "UA-124960219-1"
+    },
+    "triggers": {
+      "trackPageview": {
+        "on": "visible",
+        "request": "pageview"
+      }
+    }
+  }
+  </script>
+</amp-analytics>
+  <%- include('components/_site-header') %>
+  <%- include('components/_article', {data: data}) %>
+  <%- include('components/_site-footer') %>
+<amp-install-serviceworker
+  src="https://ryota-mizumaki.com/sw.js"
+  layout="nodisplay">
+</amp-install-serviceworker>
+</body>
+</html>

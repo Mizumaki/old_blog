@@ -1,0 +1,688 @@
+    /* 以下、指定CSS */
+
+    /* 共通 */
+    p {
+      line-height: 2;
+    }
+
+    /* インラインコード */
+    p > code {
+      margin: 0 .2em;
+      padding: .2em .4em;
+      border: 1px solid #e0e0e0;
+      border-radius: .3em;
+      background: #f1f1f1;
+      color: #424242;
+      font-size: 90%;
+      vertical-align: 1px;
+      font-family: inherit;
+    }
+
+    /* 文字 */
+
+    span.blue {
+      color: #7EDBEB;
+      text-shadow: 0 0 .1em, 0 0 .3em;
+    }
+
+    /* サイトネームを、WEBフォントで表示 */
+    p.site-name span.blazing-fast {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* スライドアニメーションボタン */
+    /* ボタン初期位置の相対的な位置など */
+    .button_base {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      margin-top: -1.8rem;
+      margin-left: -4.5rem;
+      width: 9.2rem;
+      height: 4rem;
+    }
+
+    .b03_skewed_slide_in {
+      overflow: hidden;
+      border: 1px solid #fff;
+    }
+
+    .b03_skewed_slide_in div {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      height: 4rem;
+      padding: .8rem .7rem .8rem .9rem;
+    }
+    /* もとからあるボタン */
+    .b03_skewed_slide_in div:nth-child(1) {
+      color: inherit;
+      background-color: inherit;
+    }
+    /* スライドしてくるボタン */
+    .b03_skewed_slide_in div:nth-child(2) {
+      background-color: #fff;
+      width: 230px;
+      transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transform: translate(-250px, 0px) skewX(-30deg);
+      -webkit-transform: translate(-250px, 0px) skewX(-30deg);
+      -moz-transform: translate(-250px, 0px) skewX(-30deg);
+    }
+    /* 最終的な表示のボタン */
+    .b03_skewed_slide_in div:nth-child(3) {
+      color: #152231;
+      font-weight: bold;
+      left: -200px;
+      transition: left 0.2s ease;
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
+    }
+
+    .b03_skewed_slide_in:hover div:nth-child(2) {
+      transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      transform: translate(-15px, 0px) skewX(-30deg);
+      -webkit-transform: translate(-15px, 0px) skewX(-30deg);
+      -moz-transform: translate(-15px, 0px) skewX(-30deg);
+    }
+
+    .b03_skewed_slide_in:hover div:nth-child(3) {
+      left: 0px;
+      transition: left 0.2s ease;
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
+    }
+
+    header.site {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 5rem;
+      padding: 1.2rem;
+      box-shadow: 0px 1px 5px 1px #87CEEB;
+      background: #152231;
+      color: #ffffff;
+    }
+
+    header.site p.site-name {
+      padding: 0;
+      padding-right: .4em;
+      text-align: center;
+      line-height: 1.5em;
+    }
+
+    header.site p.pwa::before {
+      content: "💎";
+    }
+
+    header.site p.amp::before {
+      content: "⚡";
+    }
+
+    header.site ul {
+      display: none;
+    }
+
+    footer.site {
+      width: 100%;
+      padding: 2rem;
+      background: #152231;
+      color: white;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+
+    /* 記事ページ用 */
+
+    article.article div.content {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 1.6rem;
+    }
+
+    article.article div.content a:hover {
+      color: #7edbeb;
+    }
+
+    nav.breadcrumb {
+      color: #808080;
+      font-weight: bold;
+    }
+
+    nav.breadcrumb ol::before {
+      content: '';
+      display: inline-block;
+      width: 1.3em;
+      height: 1.4em;
+      background-image: url(/icon/location_breadcrumb.svg);
+      background-size: contain;
+      vertical-align: middle;
+    }
+
+    nav.breadcrumb ol>li {
+      /* リストを横並びに */
+      display: inline-block;
+    }
+
+    nav.breadcrumb ol>li:not(:first-child)::before {
+      content: '';
+      display: inline-block;
+      width: 1.3em;
+      height: 1.4em;
+      background-image: url(/icon/arrow_right.svg);
+      background-size: contain;
+      vertical-align: middle;
+    }
+
+    header.article {
+      padding-top: 1.6rem;
+      padding-bottom: 3.2rem;
+    }
+
+    header.article nav.breadcrumb {
+      width: 100%;
+      padding: 1.3rem 0;
+      text-align: left;
+      font-size: 1.4rem;
+    }
+
+    header.article h1 {
+      margin: 2.4rem .3rem;
+    }
+
+    header.article div.information {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0;
+    }
+
+    ul.tags {
+      font-size: 1.4rem;
+      list-style: none;
+    }
+
+    li.tag {
+      display: inline-block;
+      margin-right: .5em;
+      border-radius: .3em;
+      background: #eeeeee;
+    }
+
+    li.tag a {
+      display: inline-block;
+      padding: .3em 1.1em;
+    }
+
+    header.article div.last-update-date {
+      text-align: right;
+    }
+
+    header.article div.last-update-date time {
+      color: grey;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    div.last-update-date time::before {
+      content: '';
+      display: inline-block;
+      width: 1.3em;
+      height: 1.4em;
+      background-image: url(/icon/refresh.svg);
+      background-size: contain;
+      vertical-align: middle;
+    }
+
+    div.share-buttons .twitter {
+      background: #1DA1F2;
+    }
+
+    div.share-buttons .facebook {
+      background: #395185;
+    }
+
+    div.share-buttons .hatena {
+      background: #00A4DE;
+    }
+
+    div.share-buttons .pocket {
+      background: #ef4056;
+    }
+
+    div.share-buttons ul {
+      display: flex;
+      list-style: none;
+    }
+
+    div.share-buttons ul li {
+      flex: 1 1 0;
+    }
+
+    div.share-buttons ul li a {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* アイコン上の余白を調整 */
+    div.share-buttons ul li.twitter a {
+      padding-top: 1.4rem;
+    }
+
+    div.share-buttons ul li.facebook a {
+      padding-top: 1.2rem;
+    }
+
+    div.share-buttons ul li.hatena a {
+      padding-top: .8rem;
+    }
+
+    div.share-buttons ul li.pocket a {
+      padding-top: 1.4rem;
+    }
+
+    header.article div.share-buttons {
+      padding-top: .8rem;
+      padding-bottom: 4.8rem;
+    }
+
+    article.article section {
+      padding-bottom: 2rem;
+    }
+
+    article.article section.agenda {
+      padding-bottom: 3rem;
+    }
+
+    section.agenda div.agenda {
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 3px;
+      background: #385575;
+    }
+
+    div.agenda h4 {
+      border-bottom: 1px solid #87CEEB;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: normal;
+      color: #ffffff;
+    }
+
+    div.agenda ol {
+      width: 100%;
+      margin: 0 auto;
+      padding: .5em;
+      border: 1px solid #ddd;
+      border-top: none;
+      background: #fafafa;
+      list-style: none;
+    }
+
+    div.agenda ol.under15 {
+      font-size: 1.7rem;
+    }
+
+    div.agenda ol.over15 {
+      font-size: 1.6rem;
+    }
+
+    div.agenda ol.over17 {
+      font-size: 1.4rem;
+    }
+
+    div.agenda ol.over20{
+      font-size: 1.3rem;
+    }
+
+    div.agenda ol li {
+      padding-bottom: .3em;
+    }
+
+    div.agenda ol li::before {
+      content: '- ';
+    }
+    /* h3が目次に含まれる場合 */
+    div.agenda ol li ol {
+      padding: 0 0 0 .8em;
+    }
+
+    article.article div.content div.article-main h2 {
+      margin-bottom: .8em;
+      padding-top: .4em;
+      padding-bottom: .1em;
+      border-bottom: 1px solid #ddd;
+    }
+
+    article.article div.content div.article-main h3 {
+      margin: .5em 0 1em 0;
+    }
+
+    article.article div.content div.article-main h4 {
+      margin-bottom: 1em;
+    }
+
+    div.article-main a {
+      text-decoration: underline;
+      color: #12c3e2;
+    }
+
+    div.article-main a:hover {
+      text-decoration: none;
+    }
+
+    div.article-main ul, div.article-main ol {
+      padding: 0 1em 1em 1em;
+    }
+
+    div.article-main ul li, div.article-main ol li {
+      margin-bottom: .5em;
+    }
+
+    div.article-main amp-img {
+      width: 75%;
+      margin: 2rem auto;
+    }
+
+    div.article-main figcaption {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #78797C;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    div.article-main table {
+      width: 90%;
+      margin: 1rem auto 3rem auto;
+      border-left: 1px solid #ddd;
+    }
+
+    div.article-main table tbody tr:nth-child(odd) {
+      background: #eee;
+    }
+
+    div.article-main table th {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      padding: 1rem 2rem;
+      font-weight: bold;
+    }
+    
+    div.article-main table td {
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ccc;
+      padding: .8rem 1rem;
+    }
+
+    footer.article div.writer {
+      padding: 5rem 0;
+      background: #152231;
+      color: #fff;
+    }
+
+    footer.article div.writer div.detail {
+      max-width: 70rem;
+      margin: 0 auto;
+    }
+
+    footer.article div.writer div.detail div.about {
+      position: relative;
+      padding: 1em;
+      font-style: normal;
+      /*
+      border: 2px dotted #f2c602;
+      */
+      border-radius: 1rem;
+    }
+
+    footer.article div.writer div.detail div.about::before,
+    footer.article div.writer div.detail div.about::after {
+      font-size: 5.4rem;
+      font-weight: bold;
+      color: #7edbed;
+      text-shadow: 0 0 .1em, 0 0 .3em;
+      position: absolute;
+      display: inline-block;
+    }
+
+    footer.article div.writer div.detail div.about::before {
+      content: '「';
+      top: 0;
+      left: 0;
+    }
+
+    footer.article div.writer div.detail div.about::after {
+      content: '」';
+      bottom: 0;
+      right: 0;
+    }
+
+    footer.article div.writer div.detail div.about h4 {
+      padding-bottom: 1em;
+      line-height: 1.4em;
+      text-align: center;
+      font-style: italic;
+      color: #f2c602;
+      text-shadow: 0 1px hsl(49, 98%, 38%), 0 2px hsl(49, 98%, 28%), 0 2px hsl(49, 98%, 18%), 0 3px hsl(49, 98%, 8%), 0 4px hsl(49, 98%, 3%),
+      0 5px hsl(49, 98%, 1%), 0 5px 10px black;
+    }
+
+    footer.article div.writer div.detail div.about p {
+      padding: 0 5.4rem 1em 6.4rem;
+      font-size: 1.6rem;
+    }
+
+    footer.article div.writer div.detail div.about span.sub {
+      font-size: 1.6rem;
+      color: white;
+    }
+
+    footer.article div.writer div.detail div.about div.buttons {
+      padding: 2rem 6.4rem 2rem 5.4rem;
+    }
+
+    footer.article div.writer div.detail div.about div.buttons ul {
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+    }
+
+    footer.article div.writer div.detail div.about div.buttons ul img {
+      margin-top: .7rem;
+    }
+
+    footer.article div.writer div.detail div.about div.buttons ul li div.more-detail {
+      border: 1px solid #fff;
+      border-radius: .3em;
+      font-size: 1.4rem;
+    }
+
+    footer.article nav.breadcrumb {
+      max-width: 112rem;
+      margin: 0 auto;
+      padding: 1.5rem 4rem;
+      text-align: right;
+      font-size: 1.6rem;
+    }
+
+    footer.article nav.breadcrumb a:hover {
+      color: #7edbeb;
+    }
+
+    article.article div.related-articles {
+      background: #152231;
+      color: white;
+    }
+
+    article.article div.related-articles h4 {
+      color: white;
+    }
+
+    /* ヘッダーナビゲーションを表示。表示するカラム数により、min-widthは変化させる必要あり。 */
+
+    @media (min-width: 800px) {
+      header.site {
+        padding-top: 2.4rem;
+        padding-bottom: 0;
+      }
+
+      header.site p {
+        font-size: 2rem;
+      }
+
+      header.site ul {
+        display: flex;
+        width: 100%;
+        max-width: 112rem;
+        padding-top: 2rem;
+        list-style: none;
+        font-size: 1.6rem;
+      }
+
+      header.site ul li {
+        flex: 1 1 0;
+        text-align: center;
+      }
+
+      header.site ul li a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        padding: .5em;
+      }
+
+      header.site ul li a:hover {
+        /* background: hsl(212,18%,54%); */
+        box-shadow: 0px 5px 1px -2px #D19445;
+        color: #D19445;
+        transition: .3s;
+      }
+    }
+
+    /* 目次を右に固定する場合 */
+
+    @supports (display: grid) and ((position: sticky) or (position: -webkit-sticky)) {
+      @media (min-width: 956px) {
+        article.article div.content {
+          max-width: 112rem;
+        }
+
+        article.article main div.content {
+          display: grid;
+          grid-template-areas: "header header-side" "main side" "main side";
+          grid-template-rows: max-content;
+          grid-template-columns: minmax(720px, 80rem) minmax(220px, 30rem);
+        }
+
+        article.article header.article {
+          grid-area: header;
+        }
+
+        article.article section.agenda {
+          grid-area: side;
+          padding-left: 20px;
+        }
+
+        article.article div.article-main {
+          grid-area: main;
+        }
+
+        article.article section.agenda div.agenda {
+          position: -webkit-sticky;
+          position: sticky;
+          top: 2rem;
+          right: 0;
+          background: #ddd;
+        }
+
+        article.article section.agenda div.agenda ol {
+          background: #f6f6f6;
+          border: none;
+          color: #808080;
+        }
+      }
+    }
+
+    @supports (not (display: grid)) or ((not (position: sticky)) and (not (position: -webkit-sticky))) {
+      @media (min-width: 986px) {
+        article.article div.content {
+          padding-right: 250px;
+          max-width: 986px;
+        }
+
+        article.article section.agenda {
+          position: fixed;
+          top: 7rem;
+          right: 1rem;
+        }
+
+        article.article section.agenda div.agenda {
+          width: 22rem;
+        }
+
+        @media (min-width: 1016px) and (max-width: 1065px) {
+          article.article div.content {
+            padding-right: 280px;
+            max-width: 1016px;
+          }
+
+          article.article section.agenda div.agenda {
+            width: 250px;
+          }
+        }
+
+        @media (min-width: 1066px) {
+          article.article div.content {
+            padding-right: 330px;
+            max-width: 1066px;
+          }
+
+          article.article section.agenda div.agenda {
+            width: 300px;
+          }
+
+          @media (min-width: 1280px) {
+            article.article section.agenda {
+              right: 92px;
+            }
+
+            @media (min-width: 1366px) {
+              article.article section.agenda {
+                right: 135px;
+              }
+
+              @media (min-width: 1440px) {
+                article.article section.agenda {
+                  right: 182px;
+                }
+
+                @media (min-width: 1600px) {
+                  article.article section.agenda {
+                    right: 252px;
+                  }
+
+                  @media (min-width: 1680px) {
+                    article.article section.agenda {
+                      right: 292px;
+                    }
+
+                    @media (min-width: 1920px) {
+                      article.article section.agenda {
+                        right: 412px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }

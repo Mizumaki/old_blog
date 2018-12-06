@@ -1,0 +1,48 @@
+<article class="article">
+  <main role="main">
+    <div class='content'>
+      <%- include('article/_header', {header: data.header, date: data.date, update: data.update, category: data.category, tags: data.tags, file_name: data.file_name}) %>
+      <%- include('article/_article-main', {main: data.body}) %>
+    </div>
+    <%- include('article/_footer', {category: data.category}) %>
+  </main>
+  <aside>
+    <!-- ほんとはここに、関連記事を入れる -->
+    <%# include('_related-articles') %>
+  </aside>
+</article>
+<!-- 構造化タグ -->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "<%= data.header.title %>",
+  "name":"<%= data.header.title %>",
+  "url":"https://blog-2e0d2.firebaseapp.com/<%= data.category.main %>/<%= data.category.sub %>/<%= data.file_name %>",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://blog-2e0d2.firebaseapp.com/<%=data.img %>",
+    "height": 800,
+    "width": 800
+  },
+  "genre": "<%= data.file_name %>",
+  "keywords":["keyword1","keyword2"],
+  "description": "<%= data.header.lead %>",
+  "fileFormat":"text/html",
+  "isAccessibleForFree":true,
+  "author": {
+    "@type": "Person",
+    "name": "Ryota Mizumaki"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ryota Mizumaki",
+  },
+  "datePublished": "<%= data.header.date %>",
+  "dateModified": "<%= data.header.update %>",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://blog-2e0d2.firebaseapp.com/<%= data.category.main %>"
+  }
+}
+</script>

@@ -1,0 +1,34 @@
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <!-- AMPライブラリを追加。URLの末尾に #development=1 を追加することで、コンソールでエラーが確認できる -->
+  <title><%= data.header.title %></title>
+  <link rel="canonical" href="https://ryota-mizumaki.com/<%= data.category.main %>/<%= data.category.sub %>/<%= data.file_name %>" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="<%= data.header.lead %>">
+  <meta name="author" content="Ryota Mizumaki">
+  <!-- 対象年齢の指定 -->
+  <meta name="rating" content="General">
+  <meta name="keywords" content="<%- data.tags.join() %>">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <!-- SNS用OGPタグ -->
+  <meta property="og:title" content="<%= data.header.title %>" />
+  <meta property="og:description" content="<%= data.header.lead %>" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:site" content="@RyotaMizumaki">
+  <meta name="twitter:card" content="summary">
+  <!-- カスタムフォント -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  <%- include('css/_amp-boilerplate') %>
+  <!-- カスタムAMPコンポーネント -->
+  <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async custom-element="amp-install-serviceworker"
+  src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+  <style amp-custom>
+  <%- include('css/_reset') %>
+  <%- include('css/_common') %>
+  <%- include('css/_prismJs') %>
+  <%- include('css/_article') %>
+  </style>
+<head>
