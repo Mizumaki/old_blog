@@ -1,10 +1,20 @@
 # LT構成
+## LTの内容
+自分の来歴ざっくり
+ShadowDOMとAMPの組み合わせについて
+mdで書いてからアップロードするまでのフロー
+その他の自分のプロダクト
+
+
 ## 全体像
 ブログに書いてあること言えば良い
 https://ryota-mizumaki.com/products/Blazing-Fast-Blog/about_blog
 
 ## 状態管理
 Re-ducks (not typo)
+
+https://github.com/Mizumaki/re-ducks_example
+https://qiita.com/Statham/items/13a07cf43a5151c8f0c2
 
 ## CSS
 css in js (emotion)
@@ -42,5 +52,6 @@ Cloud Storageに吐く
   Cloud Functionsの代替案を考える
     個人開発者の味方ではある。
     Cloud Functionの動きに速度が縛られる && デバッグとかが大変（一応ローカルで動くものもなくはないが、イマイチ）
+      書くのに癖がいる（バックエンドいらないを標語にしているmBaasであるからしょうがないが、正直コスト高いしすぐ忘れる。それなら、ブログなんだしVPSでやったりしてもいいかも
     サーバー書くのも結構好き（特にGo書きたい、けどJavaもありかも。Java書けてから他に移るのもありな気がしてるし、LINEで使ってるし。Rubyは今更感（昔書いたけど、書きやすかった覚えはある。
   記事を書く（これ大事
