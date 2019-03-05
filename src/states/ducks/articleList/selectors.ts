@@ -1,4 +1,4 @@
-import { IAppState } from '../index';
+import { IAppState } from "../index";
 
 export const getRegularStates = (state: IAppState) => {
   const listsState = state.articleLists;
@@ -10,8 +10,8 @@ export const getRegularStates = (state: IAppState) => {
   return {
     isLoading,
     hasError,
-    lists,
-  }
-}
+    lists
+  };
+};
 
 export default { getRegularStates };

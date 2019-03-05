@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import ScrollToTop from './containers/ScrollToTop';
-import Header from './components/Header';
-import HandlePages from './components/HandlePages';
-import Footer from './components/Footer';
+import * as React from "react";
+import { css } from "emotion";
+import ScrollToTop from "./containers/ScrollToTop";
+import Header from "./components/Header";
+import HandlePages from "./components/HandlePages";
+import Footer from "./components/Footer";
 
 const styles = {
   wrap: css({
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column'
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column"
   }),
   main: css({
-    flex: '1 0'
+    flex: "1 0"
   })
-}
+};
 
 const App = () => {
   return (
@@ -28,6 +28,6 @@ const App = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
